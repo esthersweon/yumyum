@@ -1,0 +1,15 @@
+{
+  "name": "yum_yum_food_truck_location_finder",
+  "version": "0.0.1",
+  "description": "finds food truck location near you",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jevelle and Ray",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "materialize-css": "^0.100.2"
+  }
+}
