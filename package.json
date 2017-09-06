@@ -9,7 +9,11 @@
   "author": "Jevelle and Ray",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
     "jquery": "^3.2.1",
-    "materialize-css": "^0.100.2"
+    "materialize-css": "^0.100.2",
+    "moments": "0.0.2",
+    "mongoose": "^4.11.10"
   }
 }
