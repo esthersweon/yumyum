@@ -46,7 +46,7 @@ var review_list = [
   {
     userName: `Donna`,
     image: ['/images/reviews/curryup0.jpg','/images/reviews/curryup1.jpg'],
-    foodTruckName: `Curry Up Now`,
+    foodTruck: 'Curry Up Now',
     titleOfReview: `Curry... Food Truck... <3`,
     content: `Came here because I love curry, food trucks, and after seeing the good reviews.
 
@@ -64,7 +64,7 @@ var review_list = [
   {
     userName: `Rice Krispies`,
     image: ['/images/reviews/curryup2.jpg','/images/reviews/curryup3.jpg'],
-    foodTruckName: `Curry Up Now`,
+    foodTruck: 'Curry Up Now',
     titleOfReview: `Little bit of spice a whole lotta nice`,
     content: `If you know what a samosa is, than expect your tastebuds to never return to a typical samosa after you try Curry Up Now's "Deconstructed Samosa." This $8 treat (+$1 to make it a rice bowl) is claimed an inside-out phenomenon! And I can vouch for this flavor blasting bowl of goodness.
 
@@ -80,7 +80,7 @@ var review_list = [
   {
     userName: `Taco Lover`,
     image: ['/images/reviews/elnor0.jpg','/images/reviews/elnor1.jpg'],
-    foodTruckName: `El Norteno Taco Truck`,
+    foodTruck: `El Norteno Taco Truck`,
     titleOfReview: `Tacos for days`,
     content: `Damn, that's one delicious taco. And there goes the second one down my tummy. And where's the third? Why didn't I order a third taco?!
 
@@ -96,7 +96,7 @@ var review_list = [
   {
     userName: `Diana`,
     image: ['/images/reviews/ssburrito.jpg','/images/reviews/sstaco.jpg'],
-    foodTruckName:  `Senor Sisig`,
+    foodTruck: `Senor Sisig`,
     titleOfReview: 'Authentic Food',
     content: 'This place was is one of the best taco places I have ever eaten at on weels.The people are so nice and the food tast amazing. I will definetly come here again',
     date: '',
@@ -108,7 +108,7 @@ var review_list = [
   {
     userName: `Jessie`,
     image: ['/images/reviews/ss0.jpg','/images/reviews/sscalifries.jpg'],
-    foodTruckName:  `Senor Sisig`,
+    foodTruck: `Senor Sisig`,
     titleOfReview: 'Nice people',
     content: 'The people give you a big portion and the right bang for your buck',
     date: '',
@@ -120,7 +120,7 @@ var review_list = [
   {
     userName: `Stacy`,
     image: ['/images/reviews/ss1.jpg','/images/reviews/ss2.jpg'],
-    foodTruckName:  `Senor Sisig`,
+    foodTruck: `Senor Sisig`,
     titleOfReview: 'GREAT FOOOOD!!!',
     content: 'The food makes my tummy happy',
     date: '',
@@ -132,18 +132,60 @@ var review_list = [
 ];
 
 
+db.Truck.remove({}, function(err, reviews) {
+  console.log('removed all truck');
+  db.Truck.create(truck_list, function(err, trucks){
+    if ('SAVE truck', err) {
+      console.log(err);
+      return;
+    }
+    console.log('recreated all trucks');
+    console.log("created", trucks.length, "trucks");
+    db.Review.remove({}, function(err, reviews){
+      console.log('removed all reviews');
+      review_list.forEach(function (reviewData) {
+        var review = new db.Review({
+          userName: reviewData.userName,
+          image: reviewData.image,
+          titleOfReview: reviewData.titleOfReview,
+          content: reviewData.content,
+          atmosphere: reviewData.atmosphere,
+          value: reviewData.value,
+          quality: reviewData.quality,
+          markedForDeletion: reviewData.markedForDeletion,
+        });
+        db.Truck.findOne({name: reviewData.foodTruck}, function (err, foundTruck) {
+          console.log('found truck ' + foundTruck.name + ' with review written by ' + review.userName);
+          if (err) {
+            console.log('findOne Error!', err);
+            return;
+          }
+          review.foodTruck = foundTruck;
+          review.save(function(err, savedReview){
+            if ('SAVED REVIEW ERR', err) {
+              return console.log(err);
+            }
+            console.log('saved review by' + savedReview.userName + ' for ' + foundTruck.name);
+            // console.log('THIS IS THE SAVED REVIEW', savedReview);
+            // console.log('THIS IS THE FOOD TRUCK', foundTruck);
+          });
+        });
+      });
+    });
+  });
+});
 
+
+/*
 db.Review.remove({}, function(err, reviews) {
   console.log('removed all reviews');
   db.Review.create(review_list, function(err, reviews){
-    if (err) {
+    if ('SAVE Review', err) {
       console.log(err);
       return;
     }
     console.log('recreated all reviews');
     console.log("created", reviews.length, "reviews");
-
-
     db.Truck.remove({}, function(err, trucks){
       console.log('removed all trucks');
       truck_list.forEach(function (truckData) {
@@ -154,26 +196,27 @@ db.Review.remove({}, function(err, reviews) {
           aboutTruck: truckData.aboutTruck,
           phoneNumber: truckData.phoneNumber,
           address: truckData.address,
-          review: '',
           typesOfFood: truckData.typesOfFood,
           dollarValue: truckData.dollarValue,
           markedForDeletion: truckData.markedForDeletion,
         });
-        db.Review.findOne( {foodTruckName: truckData.name}, function (err, foundReview) {
+        db.Review.findOne({foodTruckName: truckData.name}, function (err, foundReview) {
           console.log('found review ' + foundReview.userName + ' for foodTruck ' + truck.name);
           if (err) {
             console.log('Find One Error!', err);
             return;
           }
-          truck.name = foundReview;
+          foundReview;
           truck.save(function(err, savedTruck){
-            if (err) {
+            if ('SAVED TRUCK ERR', err) {
               return console.log(err);
             }
-            console.log('saved ' + savedTruck.name + ' by ' + foundTruck.userName);
+            console.log('saved ' + savedTruck.name + ' by ' + foundReview.userName);
+            console.log('HELLOOOOOOOOOOO!!!!!!');
           });
         });
       });
     });
   });
 });
+*/

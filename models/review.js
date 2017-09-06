@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Truck = require('./truck');
 
 const ReviewSchema = new Schema({
   userName: String,
   image: [String],
-  foodTruckName: String,
+  foodTruck: {type: Schema.Types.ObjectId, ref: 'Truck'},
   titleOfReview: String,
   content: String,
   date: Date,

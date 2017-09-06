@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Review = require('./review');
+
 
 const TruckSchema = new Schema({
   name: String,
@@ -9,7 +9,6 @@ const TruckSchema = new Schema({
   aboutTruck: String,
   phoneNumber: String,
   address: String,
-  review: {type: Schema.Types.ObjectId, ref: 'Review'},
   typesOfFood:[String],
   dollarValue:String,
   markedForDeletion: Boolean,
