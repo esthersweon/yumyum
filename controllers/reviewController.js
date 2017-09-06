@@ -16,10 +16,16 @@ function reviewsDataForOneTruck(req, res) {
   });
 };
 
+function createReview(req, res) {
+  console.log('createReview route is working');
+};
+
+function deleteReview(req, res) {
+  console.log('deleteReview route is working');
+};
+
 module.exports = {
   reviewsDataForOneTruck: reviewsDataForOneTruck,
-  // createNewProfile: createNewProfile,
-  // showOneProfile: showOneProfile,
-  // updateOneProfile: updateOneProfile,
-  // removeOneProfile: removeOneProfile
+  createReview: createReview,
+  deleteReview: deleteReview,
 };

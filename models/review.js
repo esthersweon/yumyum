@@ -12,7 +12,10 @@ const ReviewSchema = new Schema({
   atmosphere: Number,
   value: Number,
   quality: Number,
-  markedForDeletion: Boolean,
+  markedForDeletion: {
+    type: Boolean,
+    default: false
+  },
 });
 
 const Review = mongoose.model('Review', ReviewSchema);
