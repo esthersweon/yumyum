@@ -47,6 +47,11 @@ app.get('/', function homepage(req, res) {
 // render just the API information
 app.get('/api', controllers.api.index);
 
+// renders the map data
+app.get('/api/foodtruckresults', controllers.truck.mapResultsWithOnlyTruckData);
+
+// render reviews for a truck
+app.get('/api/:truckId/reviews', controllers.review.reviewsDataForOneTruck);
 
  /**********
  * SERVER *
