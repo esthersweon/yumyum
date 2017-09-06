@@ -160,6 +160,8 @@ db.Truck.remove({}, function(err, reviews) {
             console.log('findOne Error!', err);
             return;
           }
+          // we are saying that were you find the db.Truck where the name of the truck === the name of the truck in the review
+          // then set the name truck that you found === to the name of the food truck in the review
           review.foodTruck = foundTruck;
           review.save(function(err, savedReview){
             if ('SAVED REVIEW ERR', err) {
