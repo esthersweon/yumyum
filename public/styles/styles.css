@@ -22,6 +22,7 @@ h1 {
 	font-size: inherit;
 }
 #foodheader {
-	background-image: url("../images/food_truck/foodheader.jpg");
-	background-size: cover;
+/*	background-image: url("../images/food_truck/foodheader.jpg");
+	background-size: cover;*/
+	background-color: white;
 }

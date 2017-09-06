@@ -44,8 +44,29 @@
         <div class="row center">
           <h5 class="header col s12 light">Time to order?</h5>
         </div>
+          
         <div class="row center">
-          <a href="#" id="download-button" class="btn-large waves-effect waves-light black">Find Truck</a>
+          <div class="row">
+            <form class="col 12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input placeholder="Truck Name" id="truck_name" type="text" class="validate">
+                  <label for="truck_name">Truck Name</label>
+
+                </div>
+                <div class="input-field col s6">
+                  <input id="truck_city" type="text" class="validate">
+                  <label for="truck_city">San Francisco</label>
+                </div>
+                
+              </div>
+            </form>
+            <a href="#" id="download-button" class="btn-large waves-effect waves-light black">Find Truck</a
+          </div>
+
+
+
+          
         </div>
         <br><br>
       </div>
@@ -125,14 +146,70 @@
 
 
 
+  <h1>This is used for creating trucks and making sure data submits</h1>
 
-
-
-
-
-
-
-
+  <div class="row">
+    <form id="form" class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Truck Name" id="truck_name" type="text" class="validate">
+          <label for="truck_name">Truck Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="History of Truck" id="about_truck" type="text" class="validate">
+          <label for="about_truck">About Truck</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
+          <label for="truck_address">Truck Address</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
+          <label for="number">Phone Number</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
+          <label for="truck_foodtype">Food Type</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Average price of food" id="truck_prices" type="text" class="validate">
+          <label for="truck_prices">Truck Prices</label>
+        </div>
+      </div>
+    <div class="row">
+      <div class="file-field input-field col s6">
+        <div class="btn">
+          <span>File</span>
+          <input type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input id='trucklogo' class="file-path validate" type="text" placeholder="Upload company logo">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="file-field input-field col s6">
+        <div class="btn">
+          <span>File</span>
+          <input type="file" multiple>
+        </div>
+        <div class="file-path-wrapper">
+          <input  id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 
 
@@ -142,3 +219,36 @@
  -->
   </body>
 </html>
+
+
+
+
+
+
+      
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
