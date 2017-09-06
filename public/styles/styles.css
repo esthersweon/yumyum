@@ -1,0 +1,27 @@
+body {
+  
+  color: #333;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: white; /* Sanity Check! */
+}
+
+h1 {
+  margin-top: 100px;
+  text-align: center;
+}
+
+#foodheader {
+	
+	max-width: 100%;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+#foodheader {
+	background-image: url("../images/food_truck/foodheader.jpg");
+	background-size: cover;
+}
