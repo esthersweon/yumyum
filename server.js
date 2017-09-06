@@ -50,9 +50,23 @@ app.get('/api', controllers.api.index);
 // renders the map data
 app.get('/api/foodtruckresults', controllers.truck.mapResultsWithOnlyTruckData);
 
-// render reviews for a truck
+// render all reviews for a truck
 app.get('/api/:truckId/reviews', controllers.review.reviewsDataForOneTruck);
 
+// create a new truck
+app.post('/api/foodtruckresults', controllers.truck.createNewTruck)
+
+// edit an existing truck
+app.put('/api/:truckId', controllers.truck.editTruck)
+
+// remove an existing truck
+app.delete('/api/:truckId', controllers.truck.removeTruck)
+
+// create a review for a truck
+app.post('/api/:truckId/reviews', controllers.review.createReview)
+
+// delete a review for a truck
+app.delete('/api/:truckId/reviews', controllers.review.deleteReview)
  /**********
  * SERVER *
  **********/

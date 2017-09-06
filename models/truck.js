@@ -11,7 +11,10 @@ const TruckSchema = new Schema({
   address: String,
   typesOfFood:[String],
   dollarValue:String,
-  markedForDeletion: Boolean,
+  markedForDeletion: {
+    type: Boolean,
+    default: false
+  },
 });
 
 const Truck = mongoose.model('Truck', TruckSchema);
