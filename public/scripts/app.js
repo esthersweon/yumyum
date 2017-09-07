@@ -184,15 +184,15 @@ function editTruck() {
 }
 
 
-// Rendering the truck data 
+// Rendering the truck data
 function renderTruck(truck) {
 var trucksHTML = (`
 
-	 	 <div class="col s4"> 
+	 	 <div class="col s4">
 	 	  <div class="card medium card-truck" data-truck-id="${truck._id}" >
             <div class="card-image waves-effect waves-block waves-light">
               <img  class="activator" class='col s4'class="responsive-img" src="${truck.logo}">
-              
+
             </div>
             <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
@@ -253,14 +253,12 @@ $.ajax ({
 	console.log('This truck has been removed', truckRemoved);
 	truck.remove()
 });
-=======
-$('#trucks').prepend(trucksHTML)	
-  };   
-});
+};   
 
 
-var trucksHTMLForm = function (truckData) { `	
-  `} 
+
+var trucksHTMLForm = function (truckData) { `
+  `}
 // using the truck Id to remove on the correct slected truck
 function removeTruck () {
   var truck = $(this).closest('.card-truck');
@@ -271,7 +269,7 @@ function removeTruck () {
  $.ajax ({
   method: 'delete',
   url: '/api/' + truckId,
-  data: removeTruckData, 
+  data: removeTruckData,
 })
  .then(function (truckRemoved) {
    console.log('This truck has been removed', truckRemoved);
