@@ -20,6 +20,10 @@ function createReview(req, res) {
   console.log('createReview route is working');
 };
 
+function editReview(req, res) {
+  console.log('editReview route is working');
+};
+
 function deleteReview(req, res) {
   console.log('deleteReview route is working');
 };
@@ -27,5 +31,6 @@ function deleteReview(req, res) {
 module.exports = {
   reviewsDataForOneTruck: reviewsDataForOneTruck,
   createReview: createReview,
+  editReview: editReview,
   deleteReview: deleteReview,
 };

@@ -65,6 +65,9 @@ app.delete('/api/:truckId', controllers.truck.removeTruck)
 // create a review for a truck
 app.post('/api/:truckId/reviews', controllers.review.createReview)
 
+// create a review for a truck
+app.put('/api/:truckId/reviews', controllers.review.editReview)
+
 // delete a review for a truck
 app.delete('/api/:truckId/reviews', controllers.review.deleteReview)
  /**********
