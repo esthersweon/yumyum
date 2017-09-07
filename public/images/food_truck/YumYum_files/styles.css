@@ -22,21 +22,3 @@ h1 {
 	background-size: cover;
 	background-color: white;
 }
-
-
-
-.img-responsive { 
-    width:100%;
-}
-body {
-  background-image: url("../images/food_truck/streetheader.jpg");
-  background-size: 100%;
-
-}
-.row .col.s12 {
-color: white;
-}
-
-#intro {
-  font-family: 'Indie Flower', cursive;
-}

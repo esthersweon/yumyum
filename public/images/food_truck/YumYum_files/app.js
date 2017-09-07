@@ -39,11 +39,6 @@ $(document).ready(function(){
 // 	$("#modal1").modal("open");
 // });
 
-
-$(document).on("click", ".save-truck-edit", function () {
-  $('.modal').modal();
-});
-
 $(document).on("click", ".modal-triggers", editTruck);
 
 $(document).on("click", ".save-truck-edit", SaveTruck);
@@ -80,6 +75,7 @@ function SaveTruck(e) {
 
     	
     })
+
 }
 
 function editTruck() {
@@ -161,12 +157,14 @@ function editTruck() {
       <input value='${truckJson._id}'  name='id' placeholder="Truck Name"  id="truck_name" type="text" class="validate truck-id" hidden>
         <div class='truck-footer' >
                 <!-- The save changes button will be toggled  -->
+             <button class='btn btn-info black save-truck-edit' type="submit" >Submit</button>
         </div>
     </div>
-    <button class='btn btn-info black save-truck-edit' type="submit" >Submit</button>
   </form>
 </div>
 </section>
+
+
 	`;
 
 	$("#edit-truck-form").html(editTruckHtml);
@@ -174,16 +172,20 @@ function editTruck() {
 	// Step 1: Take JSON and create form fields with it
 	// Step 2: Replace HTML of modal body with newly-created form fields
 
+	// run modal input field
+
 }
 
 
-// Rendering the truck data 
+// render shop function
 function renderTruck(truck) {
+	console.log('Rending the damn trucks', truck)
+
 var trucksHTML = (`
-	 	 <div class="col s4"> 
-	 	  <div class="card medium card-truck" data-truck-id="${truck._id}" >
+	 	 
+	 	  <div class="card card-truck" data-truck-id="${truck._id}">
             <div class="card-image waves-effect waves-block waves-light">
-              <img  class="activator" class='col s4'class="responsive-img" src="${truck.logo}">
+              <img class="activator" src="${truck.logo}">
               
             </div>
             <div class="card-content">
@@ -193,7 +195,7 @@ var trucksHTML = (`
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
-              <img class="activator" class="responsive-img" src="${truck.image}">
+              <img class="activator" src="${truck.image}">
               <p>${truck.aboutTruck}</p>
             </div>
               <div class='card-footer' >
@@ -202,31 +204,45 @@ var trucksHTML = (`
   				<a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
               <button class='btn btn-danger red delete-truck'>Delete Truck</button>
             </div>
-          </div>
           </div>`);
-$('#trucks').prepend(trucksHTML)	
-  };   
+
+
+
+
+$('#trucks').prepend(trucksHTML)
+ 		
+};
+
+
+
+   
 });
 
 
-var trucksHTMLForm = function (truckData) { `	
-  `} 
-// using the truck Id to remove on the correct slected truck
+var trucksHTMLForm = function (truckData) { `
+	
+`} 
+
 function removeTruck () {
-  var truck = $(this).closest('.card-truck');
-  var truckId = truck.data('truck-id')
-  var removeTruckData = {
-   markedForDeletion: true,
- }
- $.ajax ({
-  method: 'delete',
-  url: '/api/' + truckId,
-  data: removeTruckData, 
-})
- .then(function (truckRemoved) {
-   console.log('This truck has been removed', truckRemoved);
-   truck.remove()
- });
+
+ console.log('THIS IS TRUCK ID ', truckId)
+
+var truck = $(this).closest('.card-truck');
+console.log(truck);
+var truckId = truck.data('truck-id')
+console.log('gotId', truckId)
+var removeTruckData = {
+	markedForDeletion: true,
+}
+$.ajax ({
+    method: 'delete',
+    url: '/api/' + truckId,
+   	data: removeTruckData, 
+  })
+.then(function (truckRemoved) {
+	console.log('This truck has been removed', truckRemoved);
+	truck.remove()
+});
 }
 
 
