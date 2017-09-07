@@ -5,18 +5,18 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../public/styles/materialize.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="../public/styles/styles.css">
+    <link type="text/css" rel="stylesheet" href="/styles/materialize.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="/styles/styles.css">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="../public/scripts/jquery.js"></script>
-    <script type="text/javascript" src="../public/scripts/materialize.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/materialize.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="../public/scripts/app.js"></script>
+    <script src="/scripts/app.js"></script>
 
   </head>
 
@@ -147,45 +147,52 @@
 
 
   <h1>This is used for creating trucks and making sure data submits</h1>
-
+<section id='truck-form' class="container"> 
   <div class="row">
     <form id="form" class="col s12">
+                                <!-- Truck Name  -->
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Truck Name" id="truck_name" type="text" class="validate">
+          <input name='name' placeholder="Truck Name" id="truck_name" type="text" class="validate">
           <label for="truck_name">Truck Name</label>
         </div>
       </div>
+                                 <!-- About Truck  -->
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="History of Truck" id="about_truck" type="text" class="validate">
+          <input name='aboutTruck' placeholder="History of Truck" id="about_truck" type="text" class="validate">
           <label for="about_truck">About Truck</label>
         </div>
       </div>
+                                  <!-- Truck Address  -->
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
+          <input name='address' placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
           <label for="truck_address">Truck Address</label>
         </div>
       </div>
+                                  <!-- Phone Number  -->
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
+          <input name='phoneNumber' placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
           <label for="number">Phone Number</label>
         </div>
       </div>
+                                   <!-- Food Type -->
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
+          <input name='typesOfFood' placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
           <label for="truck_foodtype">Food Type</label>
         </div>
       </div>
+                                  <!-- Truck Price  -->
        <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Average price of food" id="truck_prices" type="text" class="validate">
+          <input name='dollarValue' placeholder="Average price of food" id="truck_prices" type="text" class="validate">
           <label for="truck_prices">Truck Prices</label>
         </div>
       </div>
+                                  <!-- Single Logo File Upload  -->
     <div class="row">
       <div class="file-field input-field col s6">
         <div class="btn">
@@ -193,10 +200,11 @@
           <input type="file">
         </div>
         <div class="file-path-wrapper">
-          <input id='trucklogo' class="file-path validate" type="text" placeholder="Upload company logo">
+          <input name='logo' id='trucklogo' class="file-path validate" type="text" placeholder="Upload company logo">
         </div>
       </div>
     </div>
+                                  <!-- Multiple file upload  -->
     <div class="row">
       <div class="file-field input-field col s6">
         <div class="btn">
@@ -204,20 +212,53 @@
           <input type="file" multiple>
         </div>
         <div class="file-path-wrapper">
-          <input  id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
+          <input name='image' id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
         </div>
       </div>
+        <div class='truck-footer' >
+                <!-- The save changes button will be toggled  -->
+              <button class='btn btn-info black save-truck' type="submit" >Submit</button>
+        </div>
     </div>
   </form>
 </div>
+</section>
+
+
+  <div class="row" >
+  <div class="center-align" >
+  <div class="col s4 ">
+    <div id="trucks"> </div>
+  </div>
+</div>
+</div>
+
+  
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Truck Info</h4>
+      
+      <form id="edit-truck-form">
+        
+
+      </form>
+    </div>
+    <div class="modal-footer">
+    
+      <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Save Changes</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Edit Logo</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Delete Truck</a> -->
+    </div>
+  </div>
+
+
+          
 
 
 
-
-
-    <!-- <div ><img id="foodheader" src="../public/images/food_truck/foodheader.jpg"></div>
- -->
-  </body>
+</body>
 </html>
 
 
