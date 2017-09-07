@@ -7,14 +7,13 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/styles/materialize.css"  media="screen,projection"/>
     <link rel="stylesheet" href="/styles/styles.css">
-
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/materialize.js"></script>
-
+    <!-- Font indie Flower-->
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
 
@@ -22,25 +21,27 @@
 
 
   <body>
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+  <!-- Navbar -->
+  <div  id="foodheader" >
+    <nav class="transparent lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">M.O.W SF</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Local Trucks</a></li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Local Trucks</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
     </nav>
 
-    <div  id="foodheader" >
+    
 
     <div class="section no-pad-bot" id="index-banner">
       <div class="container">
         <br><br>
-        <h1 class="header center orange-text">Welcome to Yum Yum </h1>
+        <h1 id='intro' class="header center orange-text">Meals on Wheels SF </h1>
         <div class="row center">
           <h5 class="header col s12 light">Time to order?</h5>
         </div>
@@ -49,31 +50,25 @@
           <div class="row">
             <form class="col 12">
               <div class="row">
-                <div class="input-field col s6">
+               <!--  <div class="input-field col s6">
                   <input placeholder="Truck Name" id="truck_name" type="text" class="validate">
-                  <label for="truck_name">Truck Name</label>
-
-                </div>
+                  <label for="truck_name">Truck Name</label> -->
+              <!--   </div>
                 <div class="input-field col s6">
                   <input id="truck_city" type="text" class="validate">
                   <label for="truck_city">San Francisco</label>
-                </div>
-                
+                </div> -->               
               </div>
             </form>
-            <a href="#" id="download-button" class="btn-large waves-effect waves-light black">Find Truck</a
+            <a href="#" id="download-button" class="btn-large waves-effect waves-light black">Find Truck</a>
           </div>
-
-
-
-          
         </div>
         <br><br>
       </div>
     </div>
 
 
-
+<!-- Currently used for spacing and remove templates may not need though as site develops  -->
     <div class="container">
       <div class="section">
 
@@ -81,41 +76,143 @@
         <div class="row">
           <div class="col s12 m4">
             <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-              <h5 class="center">Speeds up development</h5>
-              <p class="light">Information Here</p>
+              <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
+              <h5 class="center"></h5>
+              <p class="light"></p>
             </div>
           </div>
 
           <div class="col s12 m4">
             <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-              <h5 class="center">User Experience Focused</h5>
+              <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
+              <h5 class="center"></h5>
 
-              <p class="light">Info here </p>
+              <p class="light"></p>
             </div>
           </div>
 
           <div class="col s12 m4">
             <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
-              <h5 class="center">Easy to find resturn</h5>
+              <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
+              <h5 class="center"></h5>
 
-              <p class="light">Info here </p>
+              <p class="light"></p>
             </div>
           </div>
         </div>
-
       </div>
-      <br><br>
     </div>
 </div>
-    <footer class="page-footer black">
+<!-- Where the trucks that are in the database will append to .. or newly created trucks -->
+ <div class="col row" >
+ <div id="trucks"> </div>
+    
+</div>
+
+<!-- Truck form input section for adding a truck -->  
+<section id='truck-form'  class="container"> 
+  <div class="row">
+    <form id="form" class="col s12">
+     <!-- Truck Name  -->
+      <div class="row">
+        <div class="input-field col s6 offset-s3 valign">
+          <input name='name' placeholder="Truck Name" id="truck_name" type="text" class="validate">
+          <label for="truck_name">Truck Name</label>
+        </div>
+      </div>
+    <!-- About Truck  -->
+      <div class="row" >
+        <div class="input-field col s6 offset-s3 valign">
+          <input name='aboutTruck' placeholder="History of Truck" id="about_truck" type="text" class="validate">
+          <label for="about_truck">About Truck</label>
+        </div>
+      </div>
+    <!-- Truck Address  -->
+      <div class="row">
+        <div class="input-field col s6 offset-s3 valign">
+          <input name='address' placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
+          <label for="truck_address">Truck Address</label>
+        </div>
+      </div>
+    <!-- Phone Number  -->
+      <div class="row">
+        <div class="input-field col s6 offset-s3 valign">
+          <input name='phoneNumber' placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
+          <label for="number">Phone Number</label>
+        </div>
+      </div>
+    <!-- Food Type -->
+      <div class="row">
+        <div class="input-field col s6 offset-s3 valign">
+          <input name='typesOfFood' placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
+          <label for="truck_foodtype">Food Type</label>
+        </div>
+      </div>
+      <!-- Truck Price  -->
+       <div class="row">
+        <div class="input-field col s6 offset-s3 valign">
+          <input name='dollarValue' placeholder="Average price of food" id="truck_prices" type="text" class="validate">
+          <label for="truck_prices">Truck Prices</label>
+        </div>
+      </div>
+     <!-- Single Logo File Upload  -->
+    <div class="row">
+      <div class="file-field input-field col s6 offset-s3 valign">
+        <div class="btn transparent">
+          <span>File</span>
+          <input type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input name='logo' id='trucklogo' class="file-path validate" type="text" placeholder="Upload company logo">
+        </div>
+      </div>
+    </div>
+    <!-- Multiple file upload  -->
+    <div class="row">
+      <div class="file-field input-field col s6 offset-s3 valign">
+        <div class="btn transparent">
+          <span>File</span>
+          <input type="file" multiple>
+        </div>
+        <div class="file-path-wrapper">
+          <input name='image' id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
+        </div>
+      </div>
+        <div class='truck-footer' >
+          <!-- The save changes button will be toggled  -->
+            <div class="row">
+            <div class="col s6 offset-s5 valign">
+              <button  class='btn btn-info transparent save-truck' type="submit" >Submit</button>
+              </div>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+</section>
+<!-- Truck form Ends  -->
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Truck Info</h4>
+      <form id="edit-truck-form">
+      </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+
+
+
+
+<!-- The start of the footer  -->
+ <footer class="page-footer black">
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
             <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">About YUM YUM</p>
+            <p class="grey-text text-lighten-4">About M.O.W</p>
           </div>
           <div class="col l3 s12">
             <h5 class="white-text">Settings</h5>
@@ -139,120 +236,11 @@
       </div>
       <div class="footer-copyright">
         <div class="container">
-          YUM YUM Copyright</a>
+          Meals On Wheels  Copyright 2017</a>
         </div>
       </div>
     </footer>
-
-
-
-  <h1>This is used for creating trucks and making sure data submits</h1>
-<section id='truck-form' class="container"> 
-  <div class="row">
-    <form id="form" class="col s12">
-                                <!-- Truck Name  -->
-      <div class="row">
-        <div class="input-field col s6">
-          <input name='name' placeholder="Truck Name" id="truck_name" type="text" class="validate">
-          <label for="truck_name">Truck Name</label>
-        </div>
-      </div>
-                                 <!-- About Truck  -->
-      <div class="row">
-        <div class="input-field col s6">
-          <input name='aboutTruck' placeholder="History of Truck" id="about_truck" type="text" class="validate">
-          <label for="about_truck">About Truck</label>
-        </div>
-      </div>
-                                  <!-- Truck Address  -->
-      <div class="row">
-        <div class="input-field col s6">
-          <input name='address' placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
-          <label for="truck_address">Truck Address</label>
-        </div>
-      </div>
-                                  <!-- Phone Number  -->
-      <div class="row">
-        <div class="input-field col s6">
-          <input name='phoneNumber' placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
-          <label for="number">Phone Number</label>
-        </div>
-      </div>
-                                   <!-- Food Type -->
-      <div class="row">
-        <div class="input-field col s6">
-          <input name='typesOfFood' placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
-          <label for="truck_foodtype">Food Type</label>
-        </div>
-      </div>
-                                  <!-- Truck Price  -->
-       <div class="row">
-        <div class="input-field col s6">
-          <input name='dollarValue' placeholder="Average price of food" id="truck_prices" type="text" class="validate">
-          <label for="truck_prices">Truck Prices</label>
-        </div>
-      </div>
-                                  <!-- Single Logo File Upload  -->
-    <div class="row">
-      <div class="file-field input-field col s6">
-        <div class="btn">
-          <span>File</span>
-          <input type="file">
-        </div>
-        <div class="file-path-wrapper">
-          <input name='logo' id='trucklogo' class="file-path validate" type="text" placeholder="Upload company logo">
-        </div>
-      </div>
-    </div>
-                                  <!-- Multiple file upload  -->
-    <div class="row">
-      <div class="file-field input-field col s6">
-        <div class="btn">
-          <span>File</span>
-          <input type="file" multiple>
-        </div>
-        <div class="file-path-wrapper">
-          <input name='image' id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
-        </div>
-      </div>
-        <div class='truck-footer' >
-                <!-- The save changes button will be toggled  -->
-              <button class='btn btn-info black save-truck' type="submit" >Submit</button>
-        </div>
-    </div>
-  </form>
-</div>
-</section>
-
-
-  <div class="row" >
-  <div class="center-align" >
-  <div class="col s4 ">
-    <div id="trucks"> </div>
-  </div>
-</div>
-</div>
-
-  
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Truck Info</h4>
-      
-      <form id="edit-truck-form">
-        
-
-      </form>
-    </div>
-    <div class="modal-footer">
-    
-      <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Save Changes</a>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Edit Logo</a>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Delete Truck</a> -->
-    </div>
-  </div>
-
+<!-- End of footer content -->
 
           
 
