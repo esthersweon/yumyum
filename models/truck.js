@@ -9,6 +9,8 @@ const TruckSchema = new Schema({
   aboutTruck: String,
   phoneNumber: String,
   address: String,
+  lat: Number,
+  long: Number,
   typesOfFood:[String],
   dollarValue:String,
   markedForDeletion: {
