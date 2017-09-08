@@ -3,6 +3,7 @@ var express = require('express');
 // generate a new express app and call it 'app'
 var app = express();
 
+const fileUpload = require('express-fileupload');
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
@@ -32,6 +33,10 @@ const db = require('./models');
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
+
+// This is used for uploading a file 
+app.use(fileUpload());
+
 
 /*
 * HTML Endpoints
@@ -70,6 +75,8 @@ app.put('/api/:truckId/reviews', controllers.review.editReview)
 
 // delete a review for a truck
 app.delete('/api/:truckId/reviews', controllers.review.deleteReview)
+
+
  /**********
  * SERVER *
  **********/

@@ -18,6 +18,13 @@ h1 {
 	max-width: 100%;
 }
 
+.btn {
+  width: 24%;
+  letter-spacing: 0px;
+  padding: 0 0rem;
+
+}
+
 
 .icon-block {
   padding: 0 15px;
@@ -83,4 +90,24 @@ color: white;
 
 .review-image-div {
   margin-top: 2%;
+}
+.save-truck, .up-load {
+  border: 1px solid white;
+  background-color: transparent;
+}
+.save-truck:hover, .up-load:hover {
+  background-color: white;
+  color: black;
+}
+
+/*div.card-content {
+  background-color: blue ;
+}*/
+.card.medium {
+  background-color: rgba(78,78,78, .6);
+  border: 1px solid white;
+  color: white;
+}
+.card-content {
+   border: 1px solid white;
 }
