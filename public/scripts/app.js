@@ -169,7 +169,6 @@ $(document).ready(function(){
     `;
 
     $("#edit-truck-form").html(editTruckHtml);
-
     // Step 1: Take JSON and create form fields with it
     // Step 2: Replace HTML of modal body with newly-created form fields
 
@@ -182,29 +181,30 @@ $(document).ready(function(){
 
     var trucksHTML = (`
 
-      <div class="col s4">
-      <div class="card medium card-truck" data-truck-id="${truck._id}" >
-      <div class="card-image waves-effect waves-block waves-light">
-      <img  class="activator" class='col s4' src="${truck.logo}">
+     
+     <div class="col s4 ">
+      <div class="card medium card-truck z-depth-5" data-truck-id="${truck._id}" >
+            <div class="card-image waves-effect waves-block waves-light" >
+              <img  class="activator" class='col s4' src="${truck.logo}">
 
-      </div>
-      <div class="card-content">Type of food
-      <span class="card-title activator grey-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
-      <p>Average Price: <a href="#">${truck.dollarValue}$</a></p>
+            </div>
+            <div class="card-content ">Type of food
+            <span class="card-title activator white-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
+              <p>Average Price: <a href="#">${truck.dollarValue}$</a></p>
 
-      </div>
-      <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
-      <img class="activator"  src="${truck.image}">
-      <p>${truck.aboutTruck}</p>
-      </div>
-      <div class='card-footer'  >
+            </div>
+            <div class="card-reveal">
+              <span id='setimg' class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
+              <img class="activator"  src="${truck.image}">
+              <p>${truck.aboutTruck}</p>
+            </div>
+              <div class='card-footer'  >
 
-      <!-- Modal Trigger -->
-      <a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
-      <a class='waves-effect waves-light btn red delete-truck'>Delete Truck</a>
-      <a class='waves-effect waves-light btn yellow read-truck-reviews review-buttons'>Read Reviews</a>
-      <a class='waves-effect waves-light btn blue write-truck-review review-buttons'>Write Review</a>
+        <!-- Modal Trigger -->
+              <a class="waves-effect waves-light fourbut btn  modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
+              <a class='waves-effect waves-light fourbut btn  delete-truck'>Delete Truck</a>
+              <a class='waves-effect waves-light fourbut btn  read-truck-reviews review-buttons'>Read Reviews</a>
+              <a class='waves-effect waves-light fourbut btn  write-truck-review write-review-buttons'>Write Review</a>
 
       </div>
       </div>
@@ -490,8 +490,6 @@ $(document).ready(function(){
             <div class="col s3 write-reivew-sides"></div>
             </div>
             </form>
-
-
             </div>
             </div>
             `);
