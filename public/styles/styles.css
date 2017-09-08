@@ -52,10 +52,12 @@ body {
   background-size: 100%;
 
 }
-.row .col.s12 {
+.row .col.s12, .col.s10, .review-header-name {
 color: white;
 }
-
+.col.s10 {
+  padding: 10px;
+}
 #intro {
   font-family: 'Indie Flower', cursive;
    /* -webkit-text-stroke: .5 white;*/
@@ -83,16 +85,13 @@ color: white;
 
 .review-information-info {
   border-style: solid;
-  z-index:9999;
+
 }
 
 /*.review-image-src {
   max-width: 50%;
 }*/
 
-.delete-review {
-  margin-bottom: 2.5%;
-}
 
 .review-image-div {
   margin-top: 2%;
@@ -117,3 +116,13 @@ color: white;
 .card-content {
    border: 1px solid white;
 }
+
+.reviews-userName {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+ }
