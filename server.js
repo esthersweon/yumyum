@@ -9,6 +9,13 @@ const fileUpload = require('express-fileupload');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// GeoCoder
+var NodeGeocoder = require('node-geocoder');
+
+var options = {
+  provider: 'google',
+};
+var geocoder = NodeGeocoder(options);
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 app.use(function(req, res, next) {
@@ -34,7 +41,7 @@ const db = require('./models');
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
-// This is used for uploading a file 
+// This is used for uploading a file
 app.use(fileUpload());
 
 

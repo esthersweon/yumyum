@@ -26,6 +26,8 @@ const db = require('../models');
 //   });
 // };
 
+
+
 function reviewsDataForOneTruck(req, res) {
   console.log(req.params.truckId)
   console.log('Review Results is getting data')
