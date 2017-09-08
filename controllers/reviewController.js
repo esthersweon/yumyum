@@ -4,10 +4,34 @@
 
 const db = require('../models');
 
+// function reviewsDataForOneTruck(req, res) {
+//   console.log(req.params.truckId)
+//   console.log('Review Results is getting data')
+//   db.Review.find({foodTruck: req.params.truckId}, function(err, allReviewsData) {
+//     let arrayOfReviewsToBeShown = [];
+//     let arrayOfReviewsMarkedForDeletion = [];
+//     allReviewsData.forEach( function(reviewData) {
+//       if ( reviewData.markedForDeletion === false ) {
+//         arrayOfReviewsToBeShown.push(reviewData)
+//       } else {
+//         arrayOfReviewsMarkedForDeletion.push(reviewData);
+//       }
+//     });
+//     if (err) {
+//       console.log('reviewsDataForTruck has an error: ', err)
+//     }
+//     // can i somehow send back the name of the foodtruck with the review?
+//     res.json(arrayOfReviewsToBeShown);
+//     console.log('ReviewsData sent back: ', arrayOfReviewsToBeShown);
+//   });
+// };
+
 function reviewsDataForOneTruck(req, res) {
   console.log(req.params.truckId)
   console.log('Review Results is getting data')
-  db.Review.find({foodTruck: req.params.truckId}, function(err, allReviewsData) {
+  db.Review.find({foodTruck: req.params.truckId})
+  .populate('foodTruck')
+  .exec(function (err, allReviewsData) {
     let arrayOfReviewsToBeShown = [];
     let arrayOfReviewsMarkedForDeletion = [];
     allReviewsData.forEach( function(reviewData) {
@@ -17,12 +41,12 @@ function reviewsDataForOneTruck(req, res) {
         arrayOfReviewsMarkedForDeletion.push(reviewData);
       }
     });
+    // console.log('THIS IS ALL REVIEW DATA INCLUDING TRUCK NAME, ', arrayOfReviewsMarkedForDeletion);
     if (err) {
-      console.log('reviewsDataForTruck has an error: ', err)
+      console.log('ERROR', err)
     }
-    // can i somehow send back the name of the foodtruck with the review?
+    // console.log('THIS IS ALL REVIEW DATA INCLUDING TRUCK NAME, ', allReviewsData);
     res.json(arrayOfReviewsToBeShown);
-    console.log('ReviewsData sent back: ', arrayOfReviewsToBeShown);
   });
 };
 

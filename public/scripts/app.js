@@ -44,6 +44,11 @@ $(document).on('click', '.write-truck-review', writeReviewInputOpen);
 
 $(document).on('click', '.write-truck-review-submit', writeReviewSubmit);
 
+$('#overlay-for-reviews').on('click', function() {
+  $('#overlay-for-reviews').hide();
+  $('body').removeClass('myCSS')
+});
+
 function renderAllTrucks (trucks) {
 	trucks.forEach(function (truck) {
 		console.log(trucks)
@@ -172,6 +177,7 @@ function editTruck() {
 
 // Rendering the truck data
 function renderTruck(truck) {
+  // we are also stringify the entire JSON object of the truck to store it in the modal making it easy to get it back in the beginning
 var trucksHTML = (`
 
 	 	 <div class="col s4">
@@ -239,7 +245,7 @@ $.ajax ({
 	console.log('This truck has been removed', truckRemoved);
 	truck.remove()
 });
-};   
+};
 
 
 
@@ -301,7 +307,7 @@ function removeTruck () {
 
 
 function renderAllReview (reviews) {
-
+  $('.write-review-information').remove();
   console.log('read reviews button is working');
   let currentTruckId
   currentTruckId = $(this).closest('.card-truck').attr('data-truck-id');
@@ -315,9 +321,12 @@ function renderAllReview (reviews) {
       $(this).remove();
     });
     console.log('THIS IS THE renderAllReview data coming back', currentProfileData);
+
+
     currentProfileData.forEach(function (review) {
       renderReview(review);
     });
+
   })
   .catch(function(err) {
     console.log('renderAllReview failed ', err)
@@ -333,15 +342,34 @@ function renderReview(review) {
 	console.log('Rendering one single review', review);
 
   // goes through the array of review.image and then creates a new array with the img src tag. then it joins the imge together into one string
-  let imgHTML = review.image.map(x => `<img src='${x}'/>`).join('');
+  let imgHTML = review.image.map(x => `
+    <div class="col s6 review-image-div">
+    <img class='responsive-img review-image-src' src='${x}'/>
+    </div>
+
+    `
+    ).join('');
+
+    // `
+    //   <div class="col s6'>
+    //   <img class='responsive-img review-image-src' src='${x}'/>
+    //   </div>
+    //
+    //   `
+  let titleHTML = (
+    `
+    <div class="review-information write-review-title">
+      <h2 class='reviews' name='reviews' value=''>Review for ${review.foodTruck.name}</h2>
+    </div>
+    `
+  )
+  $('#read-review-title').html(titleHTML)
 
 var reviewHTML = (`
     <div class="review-information" data-review-id='${review._id}'>
       <div class="row reviews">
+      <div class="col s1"></div>
         <div class="col s12 review-information-info">
-          <div>
-            <h2 class='reviews' name='reviews' value=''></h2>
-          </div>
           <div>
             <div>
               <span class='reviews-atmosphere reviews' name='atmosphere' value=''>atmosphere: ${review.atmosphere}</span>
@@ -371,13 +399,19 @@ var reviewHTML = (`
               <span class='reviews-image reviews' name='image' value=''>${imgHTML}</span>
             </div>
           </div>
+          <div class="col s12">
+            <button class='btn btn-danger red delete-review'>Delete Review</button>
+          </div>
         </div>
+        <div class="col s1"></div>
+
       </div>
-      <button class='btn btn-danger red delete-review'>Delete Review</button>
     </div>
     `);
-
   $('#adding-review').append(reviewHTML)
+
+  $("#overlay-for-reviews").show();
+  $('body').addClass('myCSS')
 
 
 
@@ -405,15 +439,24 @@ function deleteReview() {
 
 function writeReviewInputOpen() {
   $('.write-review-information').remove();
+  $('.review-information').remove();
+
   console.log('writeReview is working');
   let foodTruckIdForWriteReview
   foodTruckIdForWriteReview = $(this).closest('.card-truck').attr('data-truck-id');
   console.log('foodTruckIdForWriteReview ID', foodTruckIdForWriteReview)
+  // this is getting the entire object info (JSON info from the modal) which is where we sent it during the creation of the modal
+    // you use siblings b/c the a node is on the same node as the 'write review button' which is the this
+
+  var truckJson = JSON.parse($(this).siblings('.modal-triggers').attr("data-truck"));
+
+  console.log('THIS IS THE ENTIRE JSON OBJECT THAT LIVES IN THE MODAL', truckJson)
 
   let writeReviewHtml = ( `
     <div class="write-review-information" data-write-foodtruck-id='${foodTruckIdForWriteReview}'>
       <div class="row reviews">
-        <div class="col s12 review-information-info">
+        <div class="col s12 write-review-information-info">
+        <h4 class='review-header-name'>This is a review for ${truckJson.name}</hr4>
           <input class='input-for-reviews reviews-atmosphere-input' id='input-atmosphere' placeholder="Food Truck Atmosphere"></input>
           <input class='input-for-reviews reviews-value-input' id='input-value' placeholder="Food Truck Value"></input>
           <input class='input-for-reviews reviews-quality-input' id='input-quality' placeholder="Food Truck Quality"></input>
@@ -437,12 +480,14 @@ function writeReviewInputOpen() {
     </div>
   `);
   $('#write-review').append(writeReviewHtml)
+
 }
 
 function writeReviewSubmit () {
   console.log('writeReviewSubmit is working');
   let foodTruckIdForWhenSubmittingReview
   foodTruckIdForWhenSubmittingReview = $(this).closest('.write-review-information').attr('data-write-foodtruck-id');
+
 
   console.log('foodTruckIdForWhenSubmittingReview ID', foodTruckIdForWhenSubmittingReview)
   let writeReviewAtmosphere = $('.reviews-atmosphere-input').val();
@@ -484,4 +529,5 @@ function writeReviewSubmit () {
     renderReview(createdReview)
   	console.log('This is the new review that was created ', writeReviewData);
   });
+
 };
