@@ -122,7 +122,8 @@
 <section id='truck-form'  class="container"> 
 
   <div class="row">
-    <form id="form" class="col s12">
+    <!-- This form has to submit normally, not with AJAX, to get the image upload working.-->
+    <form id="form" class="col s12" method="POST" action="/api/foodtruckresults" encType="multipart/form-data">
      <!-- Truck Name  -->
       <div class="row">
         <div class="input-field col s6 offset-s3 valign">
@@ -168,9 +169,9 @@
      <!-- Single Logo File Upload  -->
     <div class="row">
       <div class="file-field input-field col s6 offset-s3 valign">
-        <div class="btn transparent">
+        <div class="btn up-load">
           <span>File</span>
-          <input type="file">
+          <input type="file" name="logo" class="logo-uploader">
         </div>
         <div class="file-path-wrapper">
           <input name='logo' id='trucklogo' class="file-path validate" type="text" placeholder="Upload company logo">
@@ -180,9 +181,9 @@
     <!-- Multiple file upload  -->
     <div class="row">
       <div class="file-field input-field col s6 offset-s3 valign">
-        <div class="btn transparent">
+        <div class="btn up-load">
           <span>File</span>
-          <input type="file" multiple>
+          <input type="file" name='image' multiple>
         </div>
         <div class="file-path-wrapper">
           <input name='image' id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
@@ -192,7 +193,7 @@
           <!-- The save changes button will be toggled  -->
             <div class="row">
             <div class="col s6 offset-s5 valign">
-              <button  class='btn btn-info transparent save-truck' type="submit" >Submit</button>
+              <button  class='btn btn-info  save-truck' type="submit" >Submit</button>
               </div>
             </div>
         </div>
@@ -200,8 +201,9 @@
   </form>
 </div>
 </section>
+<!-- Truck form Ends  -->
 
-
+<!-- Resturants Modal  -->
 
   <div class="row" >
   <div class="center-align" >
@@ -213,7 +215,7 @@
 
 
 
-<!-- Truck form Ends  -->
+
 
 
   <!-- Modal Structure -->

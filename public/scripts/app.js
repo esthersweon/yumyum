@@ -13,20 +13,6 @@ $(document).ready(function(){
     success: renderAllTrucks
   });
 
-// creating truck
- $('#truck-form form').on('submit', function(e) {
-    e.preventDefault();
-
-    var formData = $(this).serialize();
-    console.log('formData', formData);
-
-    $.post('/api/foodtruckresults', formData, function(truck) {
-      console.log('truck after POST', truck);
-      renderTruck(truck);  //render the server's response
-    });
-    $(this).trigger("reset");
-  });
-
 
 // $('#modal1').on('click',  function () {
 // 	console.log('model has been clicked')
@@ -191,26 +177,26 @@ var trucksHTML = (`
 	 	 <div class="col s4">
 	 	  <div class="card medium card-truck" data-truck-id="${truck._id}" >
             <div class="card-image waves-effect waves-block waves-light">
-              <img  class="activator" class='col s4'class="responsive-img" src="${truck.logo}">
+              <img  class="activator" class='col s4' src="${truck.logo}">
 
             </div>
-            <div class="card-content">
+            <div class="card-content">Type of food
             <span class="card-title activator grey-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
-              <p><a href="#">${truck.dollarValue}</a></p>
+              <p>Average Price: <a href="#">${truck.dollarValue}$</a></p>
 
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
-              <img class="activator" class="responsive-img" src="${truck.image}">
+              <img class="activator"  src="${truck.image}">
               <p>${truck.aboutTruck}</p>
             </div>
-              <div class='card-footer' >
+              <div class='card-footer'  >
 
 				<!-- Modal Trigger -->
-  				<a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
+  				    <a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
               <button class='btn btn-danger red delete-truck'>Delete Truck</button>
               <button class='btn btn-danger yellow read-truck-reviews review-buttons'>Read Reviews</button>
-              <button class='btn btn-danger blue write-truck-review review-buttons'>Write A Review</button>
+              <button class='btn btn-danger blue write-truck-review review-buttons'>Write Review</button>
             </div>
           </div>
           </div>`);

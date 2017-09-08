@@ -24,13 +24,27 @@ function mapResultsWithOnlyTruckData(req, res) {
 function createNewTruck(req, res) {
   console.log('create new truck route is working')
   // create a new truck route that is working 
+
   db.Truck.create(req.body, function(err, truck) {
-    if (err) { 
-      console.log('error', err); 
-    } else {
-      console.log(truck);
-      res.json(truck);
-    } 
+    // use the fileuploader to put the image file in the right place on the server
+    let truckPic = req.files.logo;
+    truckPic.mv('public/images/logos/' + truck._id);
+    // set the logo for that truck to the URL we just created
+    truck.logo = '/images/logos/' + truck._id;
+    // save and respond
+    //Now do the same thing with the images
+    let truckImage = req.files.image;
+    truckImage.mv('public/images/truck-image/' + truck._id);
+    truck.image = '/images/truck-image/' + truck._id;
+    truck.save(function(err, truck) {
+      if (err) { 
+        console.log('error', err); 
+      } else {
+        console.log(truck);
+        res.redirect('/')
+      } 
+    })
+
   });
 
 
@@ -74,9 +88,10 @@ function removeTruck(req, res) {
 };
 
 
+
 module.exports = {
   mapResultsWithOnlyTruckData: mapResultsWithOnlyTruckData,
   createNewTruck: createNewTruck,
   editTruck: editTruck,
-  removeTruck: removeTruck
+  removeTruck: removeTruck,
 };
