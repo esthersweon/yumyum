@@ -1,10 +1,19 @@
 console.log('app.js is still linked')
 $(document).ready(function(){
-
+ $('.scrollspy').scrollSpy();
   // //initialize all modals
   //  $('.modal').modal();
    $('.modal').modal();
 
+
+   $('input').on('keypress', function (event) {
+       var regex = new RegExp("^[a-zA-Z0-9]+");
+       var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+       if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+       }
+   });
 
 
   $.ajax({
@@ -13,17 +22,19 @@ $(document).ready(function(){
     success: renderAllTrucks
   });
 
-
-// $('#modal1').on('click',  function () {
-// 	console.log('model has been clicked')
-
-
-// })
-// the document is referring to the actual html page. saying once the HTML page is loaded ilisten for the click on the 'modal-triggers' and then open
-// this is to edit the truck
-// $(document).on("click", ".modal-triggers", function() {
-// 	$("#modal1").modal("open");
-// });
+  function initMap() {
+    var uluru = {lat: -25.363, lng: 131.044};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: uluru
+    });
+    console.log('MAP')
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+  initMap();
 
 
 $(document).on("click", ".save-truck-edit", function () {
@@ -202,7 +213,7 @@ var trucksHTML = (`
   				    <a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
               <button class='btn btn-danger red delete-truck'>Delete Truck</button>
               <button class='btn btn-danger yellow read-truck-reviews review-buttons'>Read Reviews</button>
-              <button class='btn btn-danger blue write-truck-review review-buttons'>Write Review</button>
+              <button class='section btn btn-danger blue write-truck-review review-buttons' href="#write-review-scrollspy">Write Review</button>
             </div>
           </div>
           </div>`);
@@ -350,12 +361,6 @@ function renderReview(review) {
     `
     ).join('');
 
-    // `
-    //   <div class="col s6'>
-    //   <img class='responsive-img review-image-src' src='${x}'/>
-    //   </div>
-    //
-    //   `
   let titleHTML = (
     `
     <div class="review-information write-review-title">
@@ -368,10 +373,14 @@ function renderReview(review) {
 var reviewHTML = (`
     <div class="review-information" data-review-id='${review._id}'>
       <div class="row reviews">
-      <div class="col s1"></div>
-        <div class="col s12 review-information-info">
+      <div class="col s1 review-sides"></div>
+        <div class="col s10 review-information-info">
           <div>
+          <div>
+            <span class='reviews-userName reviews' name='userName' value=''>${review.userName}'s Review: ${review.titleOfReview}</span>
+          </div>
             <div>
+            <br>
               <span class='reviews-atmosphere reviews' name='atmosphere' value=''>atmosphere: ${review.atmosphere}</span>
             </div>
             <div>
@@ -381,34 +390,32 @@ var reviewHTML = (`
               <span class='reviews-quality reviews' name='quality' value=''>quality: ${review.quality}</span>
             </div>
             <div>
-              <span class='reviews-userName reviews' name='userName' value=''>userName: ${review.userName}</span>
-            </div>
-            <div>
-              <span class='reviews-date reviews' name='date' value=''>date: ${review.date}</span>
-            </div>
-            <div>
-              <span class='reviews-foodTruck reviews' name='foodTruck' value=''>Name of Food Truck (id): ${review.foodTruck}</span>
-            </div>
-            <div>
-              <span class='reviews-titleOfReview reviews' name='titleOfReview' value=''>Title Of Review: ${review.titleOfReview}</span>
-            </div>
-            <div>
-              <span class='reviews-content reviews' name='content' value=''>Content: ${review.content}</span>
+            <br>
+              <span class='reviews-content reviews' name='content' value=''> ${review.content}</span>
             </div>
             <div>
               <span class='reviews-image reviews' name='image' value=''>${imgHTML}</span>
             </div>
           </div>
-          <div class="col s12">
+          <div class="col s10">
             <button class='btn btn-danger red delete-review'>Delete Review</button>
+
           </div>
         </div>
-        <div class="col s1"></div>
+        <div class="col s1 review-sides"></div>
 
       </div>
     </div>
     `);
   $('#adding-review').append(reviewHTML)
+
+  let closeButtonHtml = (
+    `
+    <button class='btn delete-review'>Close</button>
+    `
+  )
+  $('#delete-button-div').html(closeButtonHtml)
+
 
   $("#overlay-for-reviews").show();
   $('body').addClass('myCSS')
@@ -453,13 +460,16 @@ function writeReviewInputOpen() {
   console.log('THIS IS THE ENTIRE JSON OBJECT THAT LIVES IN THE MODAL', truckJson)
 
   let writeReviewHtml = ( `
-    <div class="write-review-information" data-write-foodtruck-id='${foodTruckIdForWriteReview}'>
-      <div class="row reviews">
-        <div class="col s12 write-review-information-info">
-        <h4 class='review-header-name'>This is a review for ${truckJson.name}</hr4>
-          <input class='input-for-reviews reviews-atmosphere-input' id='input-atmosphere' placeholder="Food Truck Atmosphere"></input>
-          <input class='input-for-reviews reviews-value-input' id='input-value' placeholder="Food Truck Value"></input>
-          <input class='input-for-reviews reviews-quality-input' id='input-quality' placeholder="Food Truck Quality"></input>
+    <div id='write-review-scrollspy' class='section scrollspy write-review-information' data-write-foodtruck-id='${foodTruckIdForWriteReview}'>
+      <div class="row write-reivew">
+      <div class="col s3 write-reivew-sides"></div>
+        <div class="col s6 write-review-information-info">
+        <h4 class='review-header-name'>Write a reivew for ${truckJson.name}</hr4>
+
+        <form>
+          <input type="number" min="1" max="5" class='input-for-reviews reviews-atmosphere-input' id='input-atmosphere' placeholder="Food Truck Atmosphere (1 - 5)"></input>
+          <input type="number" min="1" max="5" class='input-for-reviews reviews-value-input' id='input-value' placeholder="Food Truck Value (1 - 5)"></input>
+          <input type="number" min="1" max="5" class='input-for-reviews reviews-quality-input' id='input-quality' placeholder="Food Truck Quality (1 - 5)"></input>
           <input class='input-for-reviews reviews-titleOfReview-input' id='input-titleOfReview' placeholder="Title Of Review"></input>
           <input class='input-for-reviews reviews-content-input' id='input-content' placeholder="Content of Review"></input>
           <input class='input-for-reviews reviews-userName-input' id='input-content' placeholder="Username Here"></input>
@@ -475,12 +485,16 @@ function writeReviewInputOpen() {
               </div>
             </div>
           <button class='btn blue write-truck-review-submit review-buttons'>Submit Review</button>
+          <div class="col s3 write-reivew-sides"></div>
         </div>
+        </form>
+
+
       </div>
     </div>
   `);
   $('#write-review').append(writeReviewHtml)
-
+  $('.write-review-information')[0].scrollIntoView();
 }
 
 function writeReviewSubmit () {
@@ -529,5 +543,7 @@ function writeReviewSubmit () {
     renderReview(createdReview)
   	console.log('This is the new review that was created ', writeReviewData);
   });
+
+// RUNNING THE MAP
 
 };
