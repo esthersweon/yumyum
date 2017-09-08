@@ -1,6 +1,7 @@
 console.log('app.js is still linked')
 $(document).ready(function(){
  $('.scrollspy').scrollSpy();
+  $('.parallax').parallax();
   // //initialize all modals
   //  $('.modal').modal();
    $('.modal').modal();
@@ -193,29 +194,29 @@ function renderTruck(truck) {
   // we are also stringify the entire JSON object of the truck to store it in the modal making it easy to get it back in the beginning
 var trucksHTML = (`
 
-	 	 <div class="col s4">
-	 	  <div class="card medium card-truck" data-truck-id="${truck._id}" >
-            <div class="card-image waves-effect waves-block waves-light">
+	 	 <div class="col s4 ">
+	 	  <div class="card medium card-truck z-depth-5" data-truck-id="${truck._id}" >
+            <div class="card-image waves-effect waves-block waves-light" >
               <img  class="activator" class='col s4' src="${truck.logo}">
 
             </div>
-            <div class="card-content">Type of food
-            <span class="card-title activator grey-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
+            <div class="card-content ">Type of food
+            <span class="card-title activator white-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
               <p>Average Price: <a href="#">${truck.dollarValue}$</a></p>
 
             </div>
             <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
+              <span id='setimg' class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
               <img class="activator"  src="${truck.image}">
               <p>${truck.aboutTruck}</p>
             </div>
               <div class='card-footer'  >
 
 				<!-- Modal Trigger -->
-  				    <a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
-              <a class='waves-effect waves-light btn red delete-truck'>Delete Truck</a>
-              <a class='waves-effect waves-light btn yellow read-truck-reviews review-buttons'>Read Reviews</a>
-              <a class='waves-effect waves-light btn blue write-truck-review review-buttons'>Write Review</a>
+  				    <a class="waves-effect waves-light fourbut btn  modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
+              <a class='waves-effect waves-light fourbut btn  delete-truck'>Delete Truck</a>
+              <a class='waves-effect waves-light fourbut btn  read-truck-reviews review-buttons'>Read Reviews</a>
+              <a class='waves-effect waves-light fourbut btn  write-truck-review write-review-buttons'>Write Review</a>
 
             </div>
           </div>
@@ -548,5 +549,7 @@ function writeReviewSubmit () {
   });
 
 // RUNNING THE MAP
+
+4
 
 };

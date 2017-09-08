@@ -1,10 +1,17 @@
 
 
+
+
+
+
+
+
 /*split of text animation */
 body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: white; /* Sanity Check! */
+  background-color: rgba(205,102,029, 1)
+ 
 
 }
 .myCSS {
@@ -25,7 +32,10 @@ h1 {
   width: 24%;
   letter-spacing: 0px;
   padding: 0 0rem;
-
+  
+}
+.review-buttons {
+ 
 }
 
 
@@ -39,18 +49,29 @@ h1 {
 	background-image: url("../images/food_truck/foodheader.jpg");
 	background-size: cover;
 	background-color: white;
+
  
 }
 
-
+.save{
+  margin: 0;
+}
 
 .img-responsive {
     width:100%;
 }
-body {
-  background-image: url("../images/food_truck/streetheader.jpg");
+.truck-bg {
+  background: url("../images/food_truck/streetheader2.jpg") no-repeat center center;
   background-size: 100%;
+  width: 100%;
+  position: relative;
+  
 
+
+}
+form {
+  position: relative;
+  z-index: 1;
 }
 .row .col.s12, .col.s10, .review-header-name {
 color: white;
@@ -109,14 +130,36 @@ color: white;
   background-color: blue ;
 }*/
 .card.medium {
-  background-color: rgba(78,78,78, .6);
-  border: 1px solid white;
+  background-color: rgb(49,47,50);
+ 
   color: white;
 }
-.card-content {
-   border: 1px solid white;
+.fourbut{
+background-color: transparent; 
+border: 1px solid white;
 }
 
+
+.delete-truck:hover {
+ background-color: red; 
+}
+
+.fourbut:hover{
+transform: scale3d(1.1,1.1,1.2);
+}
+
+#setimg {
+ width: 100%;
+
+}
+.
+.card-content {
+  /* border: 1px solid orange;*/
+  color: white;
+}
+.card .card-image img{
+  height: 225px;
+}
 .reviews-userName {
   font-size: 150%;
   font-weight: bold;
