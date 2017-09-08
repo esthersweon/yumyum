@@ -1,3 +1,6 @@
+
+
+/*split of text animation */
 body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
@@ -36,6 +39,7 @@ h1 {
 	background-image: url("../images/food_truck/foodheader.jpg");
 	background-size: cover;
 	background-color: white;
+ 
 }
 
 
@@ -54,6 +58,8 @@ color: white;
 
 #intro {
   font-family: 'Indie Flower', cursive;
+   /* -webkit-text-stroke: .5 white;*/
+    font-weight: bold;
 }
 
 

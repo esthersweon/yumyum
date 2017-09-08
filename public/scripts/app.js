@@ -14,16 +14,7 @@ $(document).ready(function(){
   });
 
 
-// $('#modal1').on('click',  function () {
-// 	console.log('model has been clicked')
 
-
-// })
-// the document is referring to the actual html page. saying once the HTML page is loaded ilisten for the click on the 'modal-triggers' and then open
-// this is to edit the truck
-// $(document).on("click", ".modal-triggers", function() {
-// 	$("#modal1").modal("open");
-// });
 
 
 $(document).on("click", ".save-truck-edit", function () {
@@ -90,7 +81,7 @@ function editTruck() {
 
 		<section id='truck-form' class="container">
   <div class="row">
-    <form id="form" class="col s12">
+    <form id="form" class="col s12" method="POST" action="/api/:truckId" encType="multipart/form-data">
                                 <!-- Truck Name  -->
       <div class="row">
         <div class="input-field col s6">
@@ -200,9 +191,9 @@ var trucksHTML = (`
 
 				<!-- Modal Trigger -->
   				    <a class="waves-effect waves-light btn modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
-              <button class='btn btn-danger red delete-truck'>Delete Truck</button>
-              <button class='btn btn-danger yellow read-truck-reviews review-buttons'>Read Reviews</button>
-              <button class='btn btn-danger blue write-truck-review review-buttons'>Write Review</button>
+              <a class='waves-effect waves-light btn red delete-truck'>Delete Truck</a>
+              <a class='waves-effect waves-light btn yellow read-truck-reviews review-buttons'>Read Reviews</a>
+              <a class='waves-effect waves-light btn blue write-truck-review review-buttons'>Write Review</a>
             </div>
           </div>
           </div>`);
