@@ -10,7 +10,8 @@
 body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: rgba(205,102,029, 1)
+  background-color: black;
+
  
 
 }
@@ -61,7 +62,7 @@ h1 {
     width:100%;
 }
 .truck-bg {
-  background: url("../images/food_truck/streetheader2.jpg") no-repeat center center;
+  background: url("../images/food_truck/streetheader3.png") no-repeat center center;
   background-size: 100%;
   width: 100%;
   position: relative;
@@ -79,7 +80,7 @@ color: white;
 .col.s10 {
   padding: 10px;
 }
-#intro {
+#intro, #addt {
   font-family: 'Indie Flower', cursive;
    /* -webkit-text-stroke: .5 white;*/
     font-weight: bold;
@@ -117,11 +118,11 @@ color: white;
 .review-image-div {
   margin-top: 2%;
 }
-.save-truck, .up-load {
+.save-truck, .up-load, .write-truck-review-submit, .rev-file {
   border: 1px solid white;
   background-color: transparent;
 }
-.save-truck:hover, .up-load:hover {
+.save-truck:hover, .up-load:hover, .write-truck-review-submit:hover, .rev-file:hover {
   background-color: white;
   color: black;
 }
@@ -154,7 +155,7 @@ transform: scale3d(1.1,1.1,1.2);
 }
 .
 .card-content {
-  /* border: 1px solid orange;*/
+
   color: white;
 }
 .card .card-image img{
@@ -165,7 +166,24 @@ transform: scale3d(1.1,1.1,1.2);
   font-weight: bold;
 }
 
+input: :-placeholder:  {
+  color: red;
+}
+
+
+
 #map {
   height: 400px;
   width: 100%;
  }
+ #download-button {
+  background-color: black;
+  color: white;
+ }
+ #download-button:hover {
+  background-color: white ;;
+  color: black;
+ }
+.reveal-size {
+  max-width: 350px;
+}

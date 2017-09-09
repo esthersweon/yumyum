@@ -16,7 +16,193 @@ $(document).ready(function(){
     var defaultMapPosition = {lat: 37.774929, lng: -122.419416};
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 13,
-      center: defaultMapPosition
+      center: defaultMapPosition, 
+      styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+]
     });
     console.log('GMAP IS RUNNING')
   }
@@ -42,6 +228,11 @@ $(document).ready(function(){
   $(document).on('click', '.write-truck-review', writeReviewInputOpen);
 
   $(document).on('click', '.write-truck-review-submit', writeReviewSubmit);
+
+  $(document).on('click', '.delete-review', function () {
+    prompt('What is you reason for deleting this?')
+  })
+
 
   $('#overlay-for-reviews').on('click', function() {
     $('#overlay-for-reviews').hide();
@@ -195,7 +386,7 @@ $(document).ready(function(){
             </div>
             <div class="card-reveal">
               <span id='setimg' class="card-title grey-text text-darken-4">${truck.address}<i class="material-icons right">${truck.phoneNumber}</i></span>
-              <img class="activator"  src="${truck.image}">
+              <img class="activator reveal-size"  src="${truck.image}">
               <p>${truck.aboutTruck}</p>
             </div>
               <div class='card-footer'  >
@@ -204,13 +395,13 @@ $(document).ready(function(){
               <a class="waves-effect waves-light fourbut btn  modal-triggers" data-truck='${JSON.stringify(truck)}'>Edit Truck</a>
               <a class='waves-effect waves-light fourbut btn  delete-truck'>Delete Truck</a>
               <a class='waves-effect waves-light fourbut btn  read-truck-reviews review-buttons'>Read Reviews</a>
-              <a class='waves-effect waves-light fourbut btn  write-truck-review write-review-buttons'>Write Review</a>
+              <a href="#formscroll" class='waves-effect waves-light fourbut btn  write-truck-review write-review-buttons'>Write Review</a>
 
       </div>
       </div>
       </div>`);
       $('#trucks').prepend(trucksHTML)
-      addMapMarkers(truck.lat, truck.long)
+      addMapMarkers(truck.lat, truck.long, truck.name)
 
       console.log('THIS IS RENDER TRUCK HTML ', truck)
       console.log('THIS IS RENDER TRUCK LAT ', truck.lat)
@@ -218,7 +409,7 @@ $(document).ready(function(){
     };
 
 
-    function addMapMarkers(lat, long) {
+    function addMapMarkers(lat, long, name) {
       console.log('THIS IS addMapMarkers LAT ', lat)
       console.log('THIS IS addMapMarkers LONG ', long)
       var marker = new google.maps.Marker({
@@ -226,7 +417,9 @@ $(document).ready(function(){
           lat: lat,
           lng: long,
         },
-        map: map
+        map: map, 
+        title: name,
+        icon: '../images/food_truck/ft-icon.png',
       });
 
     }
@@ -281,40 +474,6 @@ $(document).ready(function(){
           truck.remove()
         });
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -466,7 +625,7 @@ $(document).ready(function(){
             <div class="row write-reivew">
             <div class="col s3 write-reivew-sides"></div>
             <div class="col s6 write-review-information-info">
-            <h4 class='review-header-name'>Write a reivew for ${truckJson.name}</hr4>
+            <h4 id='formscroll' class='review-header-name'>Write a reivew for ${truckJson.name}</hr4>
 
             <form>
             <input type="number" min="1" max="5" class='input-for-reviews reviews-atmosphere-input' id='input-atmosphere' placeholder="Food Truck Atmosphere (1 - 5)"></input>
@@ -478,7 +637,7 @@ $(document).ready(function(){
 
 
             <div class="file-field input-field">
-            <div class="btn">
+            <div class="btn rev-file">
             <span>File</span>
             <input type="file" multiple>
             </div>
@@ -486,7 +645,7 @@ $(document).ready(function(){
             <input class='file-path validate input-for-file' name='image' id='input-review-images' type="text" placeholder="Upload your food images">
             </div>
             </div>
-            <button class='btn blue write-truck-review-submit review-buttons'>Submit Review</button>
+            <button class='btn  write-truck-review-submit review-buttons'>Submit Review</button>
             <div class="col s3 write-reivew-sides"></div>
             </div>
             </form>
