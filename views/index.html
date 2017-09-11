@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-   <title>YumYum</title>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/styles/materialize.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="/styles/styles.css">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/materialize.js"></script>
-    <!-- Font indie Flower-->
-  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-    <!-- APPLICATION SCRIPTS -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxLEpfLwX0-0pnPsecmxAlwZQmlPe4tCU&callback=initMap">
-    </script>
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxLEpfLwX0-0pnPsecmxAlwZQmlPe4tCU"></script> -->
-    <script src="/scripts/app.js"></script>
-    <script src="https://use.fontawesome.com/68d95c8d50.js"></script>
-  </head>
+<head>
+ <title>YumYum</title>
+ <!--Import Google Icon Font-->
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!--Import materialize.css-->
+ <link type="text/css" rel="stylesheet" href="/styles/materialize.css"  media="screen,projection"/>
+ <link rel="stylesheet" href="/styles/styles.css">
+ <!--Let browser know website is optimized for mobile-->
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <!--Import jQuery before materialize.js-->
+ <script type="text/javascript" src="/scripts/jquery.js"></script>
+ <script type="text/javascript" src="/scripts/materialize.js"></script>
+ <!-- Font indie Flower-->
+ <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+ <!-- APPLICATION SCRIPTS -->
+ <script async defer
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxLEpfLwX0-0pnPsecmxAlwZQmlPe4tCU&callback=initMap">
+</script>
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxLEpfLwX0-0pnPsecmxAlwZQmlPe4tCU"></script> -->
+<script src="/scripts/app.js"></script>
+<script src="https://use.fontawesome.com/68d95c8d50.js"></script>
+</head>
 
 
-  <body>
+<body>
   <!-- Navbar -->
   <div  id="foodheader" >
     <nav class="transparent lighten-1" role="navigation">
@@ -45,116 +45,116 @@
         <br><br>
         <h1 id='intro' class="header center orange-text">Yum-Yum SF </h1>
         <div class="row center">
-           <a href="#map" id="download-button" class="btn-large waves-effect waves-light ">Find Trucks</a>
-        </div>
-        <div class="row center">
-          <div class="row">
-            <form class="col 12">
-              <div class="row">
-              </div>
-            </form>
-          </div>
-        </div>
-        <br><br>
-      </div>
-
-    </div>
-<!-- Currently used for spacing and remove templates may not need though as site develops  -->
-    <div class="container">
-      <div class="section">
-
-        <!--   Icon Section   -->
+         <a href="#map" id="download-button" class="btn-large waves-effect waves-light ">Find Trucks</a>
+       </div>
+       <div class="row center">
         <div class="row">
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
-              <h5 class="center"></h5>
-              <p class="light"></p>
+          <form class="col 12">
+            <div class="row">
             </div>
+          </form>
+        </div>
+      </div>
+      <br><br>
+    </div>
+
+  </div>
+  <!-- Currently used for spacing and remove templates may not need though as site develops  -->
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
+            <h5 class="center"></h5>
+            <p class="light"></p>
           </div>
+        </div>
 
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
-              <h5 class="center"></h5>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
+            <h5 class="center"></h5>
 
-              <p class="light"></p>
-            </div>
+            <p class="light"></p>
           </div>
+        </div>
 
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
-              <h5 class="center"></h5>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons"></i></h2>
+            <h5 class="center"></h5>
 
-              <p class="light"></p>
-            </div>
+            <p class="light"></p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 
-    
-    <div class='center-align'>
-      <div id="map"></div>
-      </div>
+
+<div class='center-align'>
+  <div id="map"></div>
+</div>
 <!-- Where the trucks that are in the database will append to .. or newly created trucks -->
- <div class="col row" >
+<div class="col row" >
  <div id="trucks"> </div>
 
 </div>
 
 <!-- Truck form input section for adding a truck -->
 <section id='truck-form'  class="col s12 truck-bg">
-<h4 id="addt" class="center-align"> Add a Truck!</h4>
+  <h4 id="addt" class="center-align"> Add a Truck!</h4>
   <div class="row save">
     <!-- This form has to submit normally, not with AJAX, to get the image upload working.-->
     <form id="form" class="col s12" method="POST" action="/api/foodtruckresults" encType="multipart/form-data">
      <!-- Truck Name  -->
-      <div class="row">
-        <div class="input-field col s6 offset-s3 valign">
-          <input name='name' placeholder="Truck Name" id="truck_name" type="text" class="validate">
-          <label for="truck_name">Truck Name</label>
-        </div>
+     <div class="row">
+      <div class="input-field col s6 offset-s3 valign">
+        <input name='name' placeholder="Truck Name" id="truck_name" type="text" class="validate">
+        <label for="truck_name">Truck Name</label>
       </div>
+    </div>
     <!-- About Truck  -->
-      <div class="row" >
-        <div class="input-field col s6 offset-s3 valign">
-          <input name='aboutTruck' placeholder="History of Truck" id="about_truck" type="text" class="validate">
-          <label for="about_truck">About Truck</label>
-        </div>
+    <div class="row" >
+      <div class="input-field col s6 offset-s3 valign">
+        <input name='aboutTruck' placeholder="History of Truck" id="about_truck" type="text" class="validate">
+        <label for="about_truck">About Truck</label>
       </div>
+    </div>
     <!-- Truck Address  -->
-      <div class="row">
-        <div class="input-field col s6 offset-s3 valign">
-          <input name='address' placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
-          <label for="truck_address">Truck Address</label>
-        </div>
+    <div class="row">
+      <div class="input-field col s6 offset-s3 valign">
+        <input name='address' placeholder="Enter prime location or stop address" id="truck_address" type="text" class="validate">
+        <label for="truck_address">Truck Address</label>
       </div>
+    </div>
     <!-- Phone Number  -->
-      <div class="row">
-        <div class="input-field col s6 offset-s3 valign">
-          <input name='phoneNumber' placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
-          <label for="number">Phone Number</label>
-        </div>
+    <div class="row">
+      <div class="input-field col s6 offset-s3 valign">
+        <input name='phoneNumber' placeholder="Please enter phone number" id="truck_phonenumber" type="tel" class="validate">
+        <label for="number">Phone Number</label>
       </div>
+    </div>
     <!-- Food Type -->
-      <div class="row">
-        <div class="input-field col s6 offset-s3 valign">
-          <input name='typesOfFood' placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
-          <label for="truck_foodtype">Food Type</label>
-        </div>
+    <div class="row">
+      <div class="input-field col s6 offset-s3 valign">
+        <input name='typesOfFood' placeholder="PLease enter style or types of food served" id="truck_foodtype" type="text" class="validate">
+        <label for="truck_foodtype">Food Type</label>
       </div>
-      <!-- Truck Price  -->
-       <div class="row">
-        <div class="input-field col s6 offset-s3 valign">
-          <input name='dollarValue' placeholder="Average price of food" id="truck_prices" type="text" class="validate">
-          <label for="truck_prices">Truck Prices</label>
-        </div>
+    </div>
+    <!-- Truck Price  -->
+    <div class="row">
+      <div class="input-field col s6 offset-s3 valign">
+        <input name='dollarValue' placeholder="Average price of food" id="truck_prices" type="text" class="validate">
+        <label for="truck_prices">Truck Prices</label>
       </div>
-     <!-- Single Logo File Upload  -->
+    </div>
+    <!-- Single Logo File Upload  -->
     <div class="row">
       <div class="file-field input-field col s6 offset-s3 valign">
         <div class="btn up-load">
@@ -177,14 +177,14 @@
           <input name='image' id='truck_images' class="file-path validate" type="text" placeholder="Upload images of company food">
         </div>
       </div>
-        <div class='truck-footer' >
-          <!-- The save changes button will be toggled  -->
-            <div class="row">
-            <div class="col s6 offset-s5 valign">
-              <button  class='btn btn-info  save-truck' type="submit" >Submit</button>
-              </div>
-            </div>
+      <div class='truck-footer' >
+        <!-- The save changes button will be toggled  -->
+        <div class="row">
+          <div class="col s6 offset-s5 valign">
+            <button  class='btn btn-info  save-truck' type="submit" >Submit</button>
+          </div>
         </div>
+      </div>
     </div>
   </form>
 </div>
@@ -193,78 +193,77 @@
 
 <!-- Resturants Modal  -->
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Truck Info</h4>
-      <form id="edit-truck-form">
-      </form>
-    </div>
-
-    <div class="modal-footer">
-      <form id="edit-truck-form">
-      </form>
-    </div>
-    <div class="modal-footer">
-
-    </div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Truck Info</h4>
+    <form id="edit-truck-form">
+    </form>
   </div>
 
- <div id='overlay-for-reviews'>
-    <div id='read-review-title'></div>
-      <div id='adding-review'></div>
+  <div class="modal-footer">
+    <form id="edit-truck-form">
+    </form>
   </div>
-
-  <div id='write-review'></div>
-
-  <div id='overlay-for-reviews'>
-    <div id='read-review-title'></div>
-      <div id='adding-review'></div>
-      <div class="row">
-        <div class='col s1'></div>
-          <div id='delete-button-div'>
-        </div>
-      </div>
+  <div class="modal-footer">
 
   </div>
+</div>
 
-  <div id='write-review'></div>
+<div id='overlay-for-reviews'>
+  <div id='read-review-title'></div>
+  <div id='adding-review'></div>
+</div>
+
+<div id='write-review'></div>
+
+<div id='overlay-for-reviews'>
+  <div id='read-review-title'></div>
+  <div id='adding-review'></div>
+  <div class="row">
+  <div class='col s1'></div>
+    <div id='delete-button-div'>
+    </div>
+  </div>
+</div>
+
+<div id='write-review'></div>
 
 </body>
 
 <!-- The start of the footer  -->
- <footer id='footer' class="page-footer black">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">Yum-Yum was founded in 2017 to help people find great local food trucks. Yum-Yum allows you to locate your favorite truck and food type. So even though it's not at a brick and mortar. You are still able to find that food roaming around town.</p>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">About</h5>
-            <ul>
-              <li><a class="white-text" href="#!">About Yum-Yum</a></li>
-              <li><a class="white-text" href="#!">Careers</a></li>
-              <li><a class="white-text" href="#!">Content Guidelines</a></li>
-              <li><a class="white-text" href="#!">Privacy Policy</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Connect</h5>
-            <ul>
-              <li><a class="white-text" href="#!"><i class="fa fa-twitter" aria-hidden="true"></i>@YUMYUM-SF</a></li>
-              <li><a class="white-text" href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i>@YUMYUM-SF</a></li>
-              <li><a class="white-text" href="#!"><i class="fa fa-facebook-official" aria-hidden="true"></i>@YUMYUM-SF</a></li>
-              <li><a class="white-text" href="#!"><i class="fa fa-snapchat-square" aria-hidden="true"></i>@YUMYUM-SF</a></li>
-            </ul>
-          </div>
-        </div>
+<footer id='footer' class="page-footer black">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Company Bio</h5>
+        <p class="grey-text text-lighten-4">Yum-Yum was founded in 2017 to help people find great local food trucks. Yum-Yum allows you to locate your favorite truck and food type. So even though it's not at a brick and mortar. You are still able to find that food roaming around town.</p>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
-          Yum-Yum SF  Copyright 2017</a>
-        </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">About</h5>
+        <ul>
+          <li><a class="white-text" href="#!">About Yum-Yum</a></li>
+          <li><a class="white-text" href="#!">Careers</a></li>
+          <li><a class="white-text" href="#!">Content Guidelines</a></li>
+          <li><a class="white-text" href="#!">Privacy Policy</a></li>
+        </ul>
       </div>
-    </footer>
+      <div class="col l3 s12">
+        <h5 class="white-text">Connect</h5>
+        <ul>
+          <li><a class="white-text" href="#!"><i class="fa fa-twitter" aria-hidden="true"></i>@YUMYUM-SF</a></li>
+          <li><a class="white-text" href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i>@YUMYUM-SF</a></li>
+          <li><a class="white-text" href="#!"><i class="fa fa-facebook-official" aria-hidden="true"></i>@YUMYUM-SF</a></li>
+          <li><a class="white-text" href="#!"><i class="fa fa-snapchat-square" aria-hidden="true"></i>@YUMYUM-SF</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Yum-Yum SF  Copyright 2017</a>
+    </div>
+  </div>
+</footer>
 <!-- End of footer content -->
 </html>
