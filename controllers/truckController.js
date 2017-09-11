@@ -90,7 +90,7 @@ function editTruck(req, res) {
         console.log('error', err);
       } else {
         console.log('showing saved truck info', saveTruck)
-        res.sendStatus(200);
+        res.send(saveTruck)
         // res.json(saveTruck);
       }
     })

@@ -1,18 +1,8 @@
 console.log('app.js is still linked')
-$(document).ready(function(){
+
   var map;
 
-  $('.scrollspy').scrollSpy();
-  // //initialize all modals
-  $('.modal').modal();
-
-  $.ajax({
-    method: 'GET',
-    url: '/api/foodtruckresults',
-    success: renderAllTrucks
-  });
-
-  function initMap() {
+function initMap() {
     var defaultMapPosition = {lat: 37.774929, lng: -122.419416};
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 13,
@@ -206,14 +196,21 @@ $(document).ready(function(){
     });
     console.log('GMAP IS RUNNING')
   }
-  initMap();
+$(document).ready(function(){
 
 
+  $('.scrollspy').scrollSpy();
+  // //initialize all modals
+  $('.modal').modal();
 
-
-  $(document).on("click", ".save-truck-edit", function () {
-    $('.modal').modal();
+  $.ajax({
+    method: 'GET',
+    url: '/api/foodtruckresults',
+    success: renderAllTrucks
   });
+  //initMap();
+
+  
 
   $(document).on("click", ".modal-triggers", editTruck);
 
@@ -234,6 +231,7 @@ $(document).ready(function(){
   })
 
 
+
   $('#overlay-for-reviews').on('click', function() {
     $('#overlay-for-reviews').hide();
     $('body').removeClass('myCSS')
@@ -249,7 +247,9 @@ $(document).ready(function(){
 
   // create new truck
   function saveTruck(e) {
+    
     e.preventDefault();
+    $('#modal1').modal('close');
     var saveData = $('#edit-truck-form').serialize();
     var truckId = $('#edit-truck-form').find('.truck-id').val();
     console.log('THIS IS TRUCK ID FROM saveTruck function ', truckId)
@@ -259,25 +259,27 @@ $(document).ready(function(){
       data: saveData,
     })
     .then(function(savedTruckData) {
-      document.location.href="/";
-      // console.log('SAVED DATA IS HERE', savedTruckData);
-      //
-      // $('[data-truck-id =' + truckId + ']').remove();
-      //
-      // renderTruck(savedTruckData);
-      //
-      // $('[data-truck-id =' + truckId + ']')[0].scrollIntoView();
-      //
+      // document.location.href="/";
+      console.log('SAVED DATA IS HERE', savedTruckData);
+      
+      $('[data-truck-id =' + truckId + ']').remove();
+      
+      renderTruck(savedTruckData);
+      
+      $('[data-truck-id =' + truckId + ']')[0].scrollIntoView();
+      
 
     });
   }
+
 
   function editTruck() {
     $("#modal1").modal("open");
 
     var truckJson = JSON.parse($(this).attr("data-truck"));
     console.log('STRINGIFY THE NAME HERE', truckJson.name)
-
+    
+    inputValidate();
     var editTruckHtml = `
 
     <section id='truck-form' class="container">
@@ -321,7 +323,7 @@ $(document).ready(function(){
     <!-- Truck Price  -->
     <div class="row">
     <div class="input-field col s6">
-    <input value='${truckJson.dollarValue}' name='dollarValue' placeholder="Average price of food" id="truck_prices" type="text" class="validate">
+    <input type="number" min="1" max="5" value='${truckJson.dollarValue}' name='dollarValue' placeholder="Average dollar value 1-5" id="truck_prices" type="text" class="validate" id='validate_num'>
     <label class='active' for="truck_prices">Truck Prices</label>
     </div>
     </div>
@@ -363,25 +365,26 @@ $(document).ready(function(){
     // Step 1: Take JSON and create form fields with it
     // Step 2: Replace HTML of modal body with newly-created form fields
 
+
   }
 
 
   // Rendering the truck data
   function renderTruck(truck) {
     // we are also stringify the entire JSON object of the truck to store it in the modal making it easy to get it back in the beginning
-
+    let dollarValue = buildDollar(truck.dollarValue || 1);
     var trucksHTML = (`
 
      
-     <div class="col s4 ">
-      <div class="card medium card-truck z-depth-5" data-truck-id="${truck._id}" >
+     <div class="col s4 card-truck" data-truck-id="${truck._id}">
+      <div class="card medium z-depth-5">
             <div class="card-image waves-effect waves-block waves-light" >
               <img  class="activator" class='col s4' src="${truck.logo}">
 
             </div>
             <div class="card-content ">Type of food
             <span class="card-title activator white-text text-darken-4">${truck.typesOfFood}<i class="material-icons right"></i></span>
-              <p>Average Price: <a href="#">${truck.dollarValue}$</a></p>
+              <p>Average Price: ${dollarValue}</p>
 
             </div>
             <div class="card-reveal">
@@ -449,7 +452,7 @@ $(document).ready(function(){
       })
       .then(function (truckRemoved) {
         console.log('This truck has been removed', truckRemoved);
-        truck.remove()
+        truckId.remove()
       });
     };
 
@@ -470,7 +473,7 @@ $(document).ready(function(){
           data: removeTruckData,
         })
         .then(function (truckRemoved) {
-          console.log('This truck has been removed', truckRemoved);
+          //This truck has been removed
           truck.remove()
         });
       }
@@ -492,27 +495,23 @@ $(document).ready(function(){
           $('.review-information').fadeOut(300, function() {
             $(this).remove();
           });
-          console.log('THIS IS THE renderAllReview data coming back', currentProfileData);
-
-
+          //This is the renderAllReview data coming back
           currentProfileData.forEach(function (review) {
             renderReview(review);
           });
-
         })
         .catch(function(err) {
           console.log('renderAllReview failed ', err)
         });
-
-
-
       }
 
 
       // render one review
       function renderReview(review) {
         console.log('Rendering one single review', review);
-
+        let atmosphereStars = buildStars(review.atmosphere);
+          let valueStars = buildStars(review.value);
+            let qualityStars = buildStars(review.quality);
         // goes through the array of review.image and then creates a new array with the img src tag. then it joins the imge together into one string
         let imgHTML = review.image.map(x => `
           <div class="col s6 review-image-div">
@@ -542,13 +541,13 @@ $(document).ready(function(){
           </div>
           <div>
           <br>
-          <span class='reviews-atmosphere reviews' name='atmosphere' value=''>atmosphere: ${review.atmosphere}</span>
+          <span class='reviews-atmosphere reviews' name='atmosphere' value=''>atmosphere: ${atmosphereStars}</span>
           </div>
           <div>
-          <span class='reviews-value reviews' name='value' value=''>value: ${review.value}</span>
+          <span class='reviews-value reviews' name='value' value=''>value: ${valueStars}</span>
           </div>
           <div>
-          <span class='reviews-quality reviews' name='quality' value=''>quality: ${review.quality}</span>
+          <span class='reviews-quality reviews' name='quality' value=''>quality: ${qualityStars}</span>
           </div>
           <div>
           <br>
@@ -706,3 +705,49 @@ $(document).ready(function(){
             // RUNNING THE MAP
 
           };
+
+
+
+function inputValidate () {
+  console.log('Validate working')
+   let num = $('#validate_num').val()
+   console.log(num);
+   var max = 5
+   var min = 1
+   console.log(max);
+   console.log(min);
+   if ((num) > max)
+   {
+      (num).val(max);
+
+      // prompt('value must be less than 5')
+   }
+   else if ((num) < min)
+   {
+      (num).val(min);
+   }       
+};
+
+
+
+
+
+//Switches rating number to visual star display
+function buildStars (num) {
+  if (num <= 1) {
+    return '&#9733;'
+  } else {
+    return ('&#9733;' + buildStars(num -1));
+  }
+}
+
+
+
+//Switches rating number to visual dollar display
+function buildDollar (num) {
+  if (num <= 1) {
+    return '&#36;'
+  } else {
+    return ('&#36;' + buildDollar(num -1));
+  }
+}

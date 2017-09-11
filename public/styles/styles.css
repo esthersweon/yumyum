@@ -83,6 +83,7 @@ color: white;
 #intro, #addt {
   font-family: 'Indie Flower', cursive;
    /* -webkit-text-stroke: .5 white;*/
+   color: white;
     font-weight: bold;
 }
 

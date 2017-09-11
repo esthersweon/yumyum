@@ -29,7 +29,7 @@ var truck_list = [
     long: -122.402425,
     review: '',
     typesOfFood:['Mexican'],
-    dollarValue:'1',
+    dollarValue:'2',
     markedForDeletion: false,
   },
   {
@@ -43,7 +43,7 @@ var truck_list = [
     long: -122.401255,
     review: '',
     typesOfFood:['Filipino'],
-    dollarValue:'1',
+    dollarValue:'3',
     markedForDeletion: false,
   },
 ];
