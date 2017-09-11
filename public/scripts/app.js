@@ -194,7 +194,6 @@ function initMap() {
   }
 ]
     });
-    console.log('GMAP IS RUNNING')
   }
 $(document).ready(function(){
 
@@ -239,20 +238,17 @@ $(document).ready(function(){
 
   function renderAllTrucks (trucks) {
     trucks.forEach(function (truck) {
-      console.log('renderAllTrucks log ', trucks)
+      //renderAllTrucks log 
       renderTruck(truck);
     });
-
   }
-
   // create new truck
   function saveTruck(e) {
-    
     e.preventDefault();
     $('#modal1').modal('close');
     var saveData = $('#edit-truck-form').serialize();
     var truckId = $('#edit-truck-form').find('.truck-id').val();
-    console.log('THIS IS TRUCK ID FROM saveTruck function ', truckId)
+    //THIS IS TRUCK ID FROM saveTruck function ', truckId
     $.ajax({
       method: 'PUT',
       url: '/api/' + truckId,
@@ -260,28 +256,18 @@ $(document).ready(function(){
     })
     .then(function(savedTruckData) {
       // document.location.href="/";
-      console.log('SAVED DATA IS HERE', savedTruckData);
-      
+      //SAVED DATA IS HERE', savedTruckData
       $('[data-truck-id =' + truckId + ']').remove();
-      
       renderTruck(savedTruckData);
-      
       $('[data-truck-id =' + truckId + ']')[0].scrollIntoView();
-      
-
     });
   }
-
-
   function editTruck() {
     $("#modal1").modal("open");
-
     var truckJson = JSON.parse($(this).attr("data-truck"));
-    console.log('STRINGIFY THE NAME HERE', truckJson.name)
-    
+    //STRINGIFY THE NAME HERE', truckJson.name
     inputValidate();
     var editTruckHtml = `
-
     <section id='truck-form' class="container">
     <div class="row">
     <form id="form" class="col s12">
@@ -323,7 +309,7 @@ $(document).ready(function(){
     <!-- Truck Price  -->
     <div class="row">
     <div class="input-field col s6">
-    <input type="number" min="1" max="5" value='${truckJson.dollarValue}' name='dollarValue' placeholder="Average dollar value 1-5" id="truck_prices" type="text" class="validate" id='validate_num'>
+    <input type="number" min="1" max="5" value='${truckJson.dollarValue}' name='dollarValue' placeholder="Average dollar value 1-5" id="truck_prices" type="number" class="validate" id='validate_num'>
     <label class='active' for="truck_prices">Truck Prices</label>
     </div>
     </div>
@@ -364,11 +350,7 @@ $(document).ready(function(){
     $("#edit-truck-form").html(editTruckHtml);
     // Step 1: Take JSON and create form fields with it
     // Step 2: Replace HTML of modal body with newly-created form fields
-
-
   }
-
-
   // Rendering the truck data
   function renderTruck(truck) {
     // we are also stringify the entire JSON object of the truck to store it in the modal making it easy to get it back in the beginning
@@ -405,16 +387,13 @@ $(document).ready(function(){
       </div>`);
       $('#trucks').prepend(trucksHTML)
       addMapMarkers(truck.lat, truck.long, truck.name)
-
-      console.log('THIS IS RENDER TRUCK HTML ', truck)
-      console.log('THIS IS RENDER TRUCK LAT ', truck.lat)
-      console.log('THIS IS RENDER TRUCK LONG ', truck.long)
+     //THIS IS RENDER TRUCK HTML , truck
+     //THIS IS RENDER TRUCK LAT, truck.lat
+     //THIS IS RENDER TRUCK LONG , truck.long
     };
-
-
     function addMapMarkers(lat, long, name) {
-      console.log('THIS IS addMapMarkers LAT ', lat)
-      console.log('THIS IS addMapMarkers LONG ', long)
+      //THIS IS addMapMarkers LAT ', lat
+      //THIS IS addMapMarkers LONG ', long
       var marker = new google.maps.Marker({
         position: {
           lat: lat,
@@ -424,24 +403,14 @@ $(document).ready(function(){
         title: name,
         icon: '../images/food_truck/ft-icon.png',
       });
-
     }
     // end of document.ready
   });
-
-
   var trucksHTMLForm = function (truckData) { `
-
     `}
-
     function removeTruck () {
-
-      console.log('THIS IS TRUCK ID ', truckId)
-
       var truck = $(this).closest('.card-truck');
-      console.log(truck);
       var truckId = truck.data('truck-id')
-      console.log('gotId', truckId)
       var removeTruckData = {
         markedForDeletion: true,
       }
@@ -451,13 +420,10 @@ $(document).ready(function(){
         data: removeTruckData,
       })
       .then(function (truckRemoved) {
-        console.log('This truck has been removed', truckRemoved);
+       //This truck has been removed, truckRemoved
         truckId.remove()
       });
     };
-
-
-
     var trucksHTMLForm = function (truckData) { `
       `}
       // using the truck Id to remove on the correct slected truck
@@ -477,16 +443,11 @@ $(document).ready(function(){
           truck.remove()
         });
       }
-
-
-
-
       function renderAllReview (reviews) {
         $('.write-review-information').remove();
-        console.log('read reviews button is working');
+      //read reviews button is working
         let currentTruckId
         currentTruckId = $(this).closest('.card-truck').attr('data-truck-id');
-        console.log('gotId', currentTruckId)
         $.ajax({
           method: 'GET',
           url: '/api/' + currentTruckId + '/reviews'
@@ -501,14 +462,12 @@ $(document).ready(function(){
           });
         })
         .catch(function(err) {
-          console.log('renderAllReview failed ', err)
+         //renderAllReview failed ', err
         });
       }
-
-
       // render one review
       function renderReview(review) {
-        console.log('Rendering one single review', review);
+       //Rendering one single review', review
         let atmosphereStars = buildStars(review.atmosphere);
           let valueStars = buildStars(review.value);
             let qualityStars = buildStars(review.quality);
@@ -575,20 +534,14 @@ $(document).ready(function(){
             `
           )
           $('#delete-button-div').html(closeButtonHtml)
-
-
           $("#overlay-for-reviews").show();
           $('body').addClass('myCSS')
-
-
-
         };
-
         function deleteReview() {
-          console.log('deleteReview is working')
+          //deleteReview is working
           let reviewId
           reviewId = $(this).closest('.review-information').attr('data-review-id');
-          console.log('deleteReview ID', reviewId)
+          //deleteReview ID', reviewId
           var removeReview = {
             markedForDeletion: true,
           }
@@ -598,8 +551,7 @@ $(document).ready(function(){
             data: removeReview,
           })
           .then(function (reviewRemoved) {
-            console.log('This truck has been removed');
-            console.log($('[data-review-id =' + reviewId + ']').remove())
+            //This truck has been removed'
             $('[data-review-id =' + reviewId + ']').remove();
           });
         };
@@ -607,25 +559,19 @@ $(document).ready(function(){
         function writeReviewInputOpen() {
           $('.write-review-information').remove();
           $('.review-information').remove();
-
-          console.log('writeReview is working');
+          //writeReview is working
           let foodTruckIdForWriteReview
           foodTruckIdForWriteReview = $(this).closest('.card-truck').attr('data-truck-id');
-          console.log('foodTruckIdForWriteReview ID', foodTruckIdForWriteReview)
           // this is getting the entire object info (JSON info from the modal) which is where we sent it during the creation of the modal
           // you use siblings b/c the a node is on the same node as the 'write review button' which is the this
-
           var truckJson = JSON.parse($(this).siblings('.modal-triggers').attr("data-truck"));
-
-          console.log('THIS IS THE ENTIRE JSON OBJECT THAT LIVES IN THE MODAL', truckJson)
-
+          //THIS IS THE ENTIRE JSON OBJECT THAT LIVES IN THE MODAL
           let writeReviewHtml = ( `
             <div id='write-review-scrollspy' class='section scrollspy write-review-information' data-write-foodtruck-id='${foodTruckIdForWriteReview}'>
             <div class="row write-reivew">
             <div class="col s3 write-reivew-sides"></div>
             <div class="col s6 write-review-information-info">
             <h4 id='formscroll' class='review-header-name'>Write a reivew for ${truckJson.name}</hr4>
-
             <form>
             <input type="number" min="1" max="5" class='input-for-reviews reviews-atmosphere-input' id='input-atmosphere' placeholder="Food Truck Atmosphere (1 - 5)"></input>
             <input type="number" min="1" max="5" class='input-for-reviews reviews-value-input' id='input-value' placeholder="Food Truck Value (1 - 5)"></input>
@@ -633,8 +579,6 @@ $(document).ready(function(){
             <input class='input-for-reviews reviews-titleOfReview-input' id='input-titleOfReview' placeholder="Title Of Review"></input>
             <input class='input-for-reviews reviews-content-input' id='input-content' placeholder="Content of Review"></input>
             <input class='input-for-reviews reviews-userName-input' id='input-content' placeholder="Username Here"></input>
-
-
             <div class="file-field input-field">
             <div class="btn rev-file">
             <span>File</span>
@@ -654,33 +598,25 @@ $(document).ready(function(){
             $('#write-review').append(writeReviewHtml)
             $('.write-review-information')[0].scrollIntoView();
           }
-
           function writeReviewSubmit () {
-            console.log('writeReviewSubmit is working');
+            //writeReviewSubmit is working
             let foodTruckIdForWhenSubmittingReview
             foodTruckIdForWhenSubmittingReview = $(this).closest('.write-review-information').attr('data-write-foodtruck-id');
-
-
-            console.log('foodTruckIdForWhenSubmittingReview ID', foodTruckIdForWhenSubmittingReview)
+            //foodTruckIdForWhenSubmittingReview ID', foodTruckIdForWhenSubmittingReview
             let writeReviewAtmosphere = $('.reviews-atmosphere-input').val();
             let writeReviewValue = $('.reviews-value-input').val();
             let writeReviewQuality = $('.reviews-quality-input').val();
             let writeReviewTitleOfReview = $('.reviews-titleOfReview-input').val();
             let writeReviewContent = $('.reviews-content-input').val();
             let writeReviewUserName = $('.reviews-userName-input').val();
-
             // need to fix the way to parse images
             let writeReviewImages = [];
             // remove the spaces first
             let writeReviewImagesUploaded = $('.input-for-file').val().replace(/\s/g, '').split(',');
-
             let filePath = '/images/food_truck/reviews/';
             for ( let i = 0; i < writeReviewImagesUploaded.length; i++) {
               writeReviewImages.push(filePath.concat(writeReviewImagesUploaded[i]));
             };
-            console.log(writeReviewImagesUploaded)
-
-
             let writeReviewData = {
               atmosphere: writeReviewAtmosphere,
               value: writeReviewValue,
@@ -699,27 +635,17 @@ $(document).ready(function(){
             .then(function (createdReview) {
               $('.write-review-information').remove();
               renderReview(createdReview)
-              console.log('This is the new review that was created ', writeReviewData);
+              //This is the new review that was created 
             });
-
             // RUNNING THE MAP
-
           };
-
-
-
 function inputValidate () {
-  console.log('Validate working')
    let num = $('#validate_num').val()
-   console.log(num);
    var max = 5
    var min = 1
-   console.log(max);
-   console.log(min);
    if ((num) > max)
    {
       (num).val(max);
-
       // prompt('value must be less than 5')
    }
    else if ((num) < min)
@@ -727,25 +653,17 @@ function inputValidate () {
       (num).val(min);
    }       
 };
-
-
-
-
-
 //Switches rating number to visual star display
 function buildStars (num) {
-  if (num <= 1) {
+  if (!num || num <= 1) {
     return '&#9733;'
   } else {
     return ('&#9733;' + buildStars(num -1));
   }
 }
-
-
-
 //Switches rating number to visual dollar display
 function buildDollar (num) {
-  if (num <= 1) {
+  if (!num || num <= 1) {
     return '&#36;'
   } else {
     return ('&#36;' + buildDollar(num -1));
