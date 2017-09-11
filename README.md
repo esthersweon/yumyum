@@ -1,8 +1,22 @@
 # yumyum
 This app is used for finding food trucks that are near you.
-Google API is used for showing the current location that you would like to meet at.
-- Start by searching for the type of food you would like to use
-- Upon search click the resturant you are looking for
-- From there you will be able to see more information about the Food Truck
-- You will have the option to view reviews or write a reviews<br>
-Find more info [here](https://docs.google.com/presentation/d/1OBfv1cG_C7j1KHdwK7W_xfbkwm3ev7ovDnUFh4hqu7E/edit#slide=id.g1fedfd4ac7_0_59)
+
+Site can be found [here](https://serene-plateau-18570.herokuapp.com/).
+
+## Description
+Foodtrucks are popping up everyday. We wanted to build an app that allows for individuals to search for food trucks near by and see the following:
+  - Food Truck Information:
+      - name
+      - price
+      - location
+      - pictures
+  - Reviews:
+      - Reviews tied to a single food truck
+      - Review that incorporates different values (quality, etc.)
+      - Review that incorporates pictures
+
+### Technologies used:
+- HTML, CSS (materialize), Mongo, Mongoose, Node.js, Google Maps API, Node-GeoCoder, Express, jQuery, Body-Parser
+
+#### Aditional information:
+- To find more information around ERD, WireFrames, Product Roamdmap, etc. Please go [here](https://docs.google.com/presentation/d/1OBfv1cG_C7j1KHdwK7W_xfbkwm3ev7ovDnUFh4hqu7E/edit?usp=sharing)
