@@ -1,21 +1,13 @@
-//require express in our app
 var express = require('express');
-// generate a new express app and call it 'app'
 var app = express();
 
 const fileUpload = require('express-fileupload');
-// parse incoming urlencoded form data
-// and populate the req.body object
+
+// why use of both const and var? Keep consistent.
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// GeoCoder
-var NodeGeocoder = require('node-geocoder');
-
-var options = {
-  provider: 'google',
-};
-var geocoder = NodeGeocoder(options);
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 app.use(function(req, res, next) {
@@ -24,7 +16,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// manages the controller routes
 var controllers = require('./controllers');
 
 /************
@@ -37,13 +28,8 @@ const db = require('./models');
 * ROUTES *
 **********/
 
-// Serve static files from the `/public` directory:
-// i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
-
-// This is used for uploading a file
 app.use(fileUpload());
-
 
 /*
 * HTML Endpoints
@@ -56,33 +42,16 @@ app.get('/', function homepage(req, res) {
 /*
 * JSON API Endpoints
 */
-// render just the API information
+// controller methods should be human-readable enough to not have comments
 app.get('/api', controllers.api.index);
-
-// renders the map data
-app.get('/api/foodtruckresults', controllers.truck.mapResultsWithOnlyTruckData);
-
-// render all reviews for a truck
-app.get('/api/:truckId/reviews', controllers.review.reviewsDataForOneTruck);
-
-// create a new truck
-app.post('/api/foodtruckresults', controllers.truck.createNewTruck)
-
-// edit an existing truck
+app.get('/api/foodtruckresults', controllers.truck.getTrucksMapData);
+app.get('/api/:truckId/reviews', controllers.review.showReviewsForTruck);
+app.post('/api/foodtruckresults', controllers.truck.createTruck)
 app.put('/api/:truckId', controllers.truck.editTruck)
-
-// remove an existing truck
 app.delete('/api/:truckId', controllers.truck.removeTruck)
-
-// create a review for a truck
 app.post('/api/:truckId/reviews', controllers.review.createReview)
-
-// create a review for a truck
 app.put('/api/:truckId/reviews', controllers.review.editReview)
-
-// delete a review for a truck
 app.delete('/api/:truckId/reviews', controllers.review.deleteReview)
-
 
  /**********
  * SERVER *

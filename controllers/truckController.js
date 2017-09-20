@@ -4,76 +4,72 @@
 
 const db = require('../models');
 
-// GeoCoder
 var NodeGeocoder = require('node-geocoder');
 
 var options = {
   provider: 'google',
 };
+
 var geocoder = NodeGeocoder(options);
 
-
-
-
-function mapResultsWithOnlyTruckData(req, res) {
-  console.log('Map Results route is working')
+// make function names human-readable and concise
+function getTrucksMapData(req, res) {
   db.Truck.find({}, function(err, allFoodTruckResults) {
-    let arrayOfFoodTrucksToBeShown = [];
-    let arrayOfFoodTrucksToBeMarkedForDeletion = [];
+    // make your variables as human readable as possible
+    // i.e. instead of arrayOfTrucksToBeMarkedForDelete --> trucksToDelete
+    let trucksToShow = [];
+    let trucksToDelete = [];
     allFoodTruckResults.forEach( function(foodTruck) {
-      if ( foodTruck.markedForDeletion === false) {
-        arrayOfFoodTrucksToBeShown.push(foodTruck);
+      if (!foodTruck.markedForDeletion) {
+        trucksToShow.push(foodTruck);
       } else {
-      arrayOfFoodTrucksToBeMarkedForDeletion.push(foodTruck);
-    }
+        //proper indentation!
+        trucksToDelete.push(foodTruck);
+      }
     });
-    res.json(arrayOfFoodTrucksToBeShown);
-    console.log('DONT SEND BACK', arrayOfFoodTrucksToBeMarkedForDeletion);
+    res.json(trucksToShow);
   });
 };
 
-function createNewTruck(req, res) {
-  console.log('create new truck route is working')
-  // create a new truck route that is working
+// It's already implied that it is a new truck. try to follow CRUD naming conventions (create, show, update, etc.)
+function createTruck(req, res) {
   geocoder.geocode(req.body.address, function(err, response) {
-    console.log('THIS IS THE RESPONSE FOR CREATE TRUCK GEOCODE',response)
-  db.Truck.create(req.body, function(err, truck) {
-    // use the fileuploader to put the image file in the right place on the server
-    let truckPic = req.files.logo;
-    truckPic.mv('public/images/logos/' + truck._id);
-    // set the logo for that truck to the URL we just created
-    truck.logo = '/images/logos/' + truck._id;
-    // save and respond
+    // USE PROPER INDENTATION
+    db.Truck.create(req.body, function(err, truck) {
+      // IF YOU NEED TO COMMENT THIS MUCH TO MAKE IT OBVIOUS WHAT YOUR CODE IS DOING,
+      // YOU SHOULD BREAK THESE LINES OUT INTO THEIR OWN FUNCTIONS THAT ARE NAMED INTUITIVELY
+      // AND INVOKE THEM IN HERE (SO IT'S OBVIOUS WHAT THE CODE IS DOING)
+      // E.G. saveLogoFile(); saveImageFile();
 
-    //Now do the same thing with the images
-    let truckImage = req.files.image;
-    truckImage.mv('public/images/truck-image/' + truck._id);
-    truck.image = '/images/truck-image/' + truck._id;
+      let truckPic = req.files.logo;
+      truckPic.mv('public/images/logos/' + truck._id);
+      truck.logo = '/images/logos/' + truck._id;
+      let truckImage = req.files.image;
+      truckImage.mv('public/images/truck-image/' + truck._id);
+      truck.image = '/images/truck-image/' + truck._id;
 
-    truck.lat = response[0].latitude;
-    truck.long = response[0].longitude;
+      truck.lat = response[0].latitude;
+      truck.long = response[0].longitude;
 
-    truck.save(function(err, truck) {
-      if (err) {
-        console.log('error', err);
-      } else {
-        console.log('THIS IS THE NEW TRUCK BEING CREATED ',truck);
-        res.redirect('/');
-        // res.json(truck);
-      }
-    })
+      truck.save(function(err, truck) {
+        if (err) {
+          console.log('error', err);
+        } else {
+          console.log('THIS IS THE NEW TRUCK BEING CREATED ',truck);
+          res.redirect('/');
+          // res.json(truck);
+        }
+      });
 
+    });
+    // this is actually the end of the db.Truck.create callback, not geocoder
+    // indent properly, and it'll be clearer where your functions start and end
   });
   // end of geocoder
-});
-
 }
 
 function editTruck(req, res) {
-  console.log('edit existing truck route is working')
-// geoCoder needs to run first and get the response and then you can run the addy
   geocoder.geocode(req.body.address, function(err, response) {
-
     db.Truck.findByIdAndUpdate(req.body.id, {$set: {
       name: req.body.name,
       image: req.body.image,
@@ -91,17 +87,12 @@ function editTruck(req, res) {
       } else {
         console.log('showing saved truck info', saveTruck)
         res.send(saveTruck)
-        // res.json(saveTruck);
       }
     })
-  // end of geocoder
-});
-
+  }); // end of geocoder
 }
 
 function removeTruck(req, res) {
-  console.log('delete truck route is working')
-  // delete a new truck route that is working
   console.log('THIS IS THE TRUCK IDEA',req.params.truckId )
   db.Truck.findByIdAndUpdate(req.params.truckId, {$set: {
     markedForDeletion: req.body.markedForDeletion}}, {new: true}, function(err, removedTruck) {
@@ -111,14 +102,11 @@ function removeTruck(req, res) {
       console.log('removeOneTruck SAVED and removed truck JSON sent back', removedTruck);
       res.json(removedTruck);
     });
-
 };
 
-
-
 module.exports = {
-  mapResultsWithOnlyTruckData: mapResultsWithOnlyTruckData,
-  createNewTruck: createNewTruck,
+  getTrucksMapData: getTrucksMapData,
+  createTruck: createTruck,
   editTruck: editTruck,
   removeTruck: removeTruck,
 };

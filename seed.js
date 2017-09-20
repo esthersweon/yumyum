@@ -141,7 +141,7 @@ var review_list = [
 db.Truck.remove({}, function(err, reviews) {
   console.log('removed all truck');
   db.Truck.create(truck_list, function(err, trucks){
-    if ('SAVE truck', err) {
+    if ('SAVE truck', err) { // not sure if this is a valid conditional; probably never runs, even if there is an error
       console.log(err);
       return;
     }
@@ -166,65 +166,19 @@ db.Truck.remove({}, function(err, reviews) {
             console.log('findOne Error!', err);
             return;
           }
-          // we are saying that were you find the db.Truck where the name of the truck === the name of the truck in the review
-          // then set the name truck that you found === to the name of the food truck in the review
+          // Doesn't matter as much as something like the seed file, which you may or may not expand on,
+          // but it's good to not use comments and instead group code into appropriately named functions
+          // so your code stays readable
+          // e.g. setTruckForEachReview()
           review.foodTruck = foundTruck;
           review.save(function(err, savedReview){
             if ('SAVED REVIEW ERR', err) {
               return console.log(err);
             }
             console.log('saved review by' + savedReview.userName + ' for ' + foundTruck.name);
-            // console.log('THIS IS THE SAVED REVIEW', savedReview);
-            // console.log('THIS IS THE FOOD TRUCK', foundTruck);
           });
         });
       });
     });
   });
 });
-
-
-/*
-db.Review.remove({}, function(err, reviews) {
-  console.log('removed all reviews');
-  db.Review.create(review_list, function(err, reviews){
-    if ('SAVE Review', err) {
-      console.log(err);
-      return;
-    }
-    console.log('recreated all reviews');
-    console.log("created", reviews.length, "reviews");
-    db.Truck.remove({}, function(err, trucks){
-      console.log('removed all trucks');
-      truck_list.forEach(function (truckData) {
-        var truck = new db.Truck({
-          name: truckData.name,
-          image: truckData.image,
-          logo: truckData.logo,
-          aboutTruck: truckData.aboutTruck,
-          phoneNumber: truckData.phoneNumber,
-          address: truckData.address,
-          typesOfFood: truckData.typesOfFood,
-          dollarValue: truckData.dollarValue,
-          markedForDeletion: truckData.markedForDeletion,
-        });
-        db.Review.findOne({foodTruckName: truckData.name}, function (err, foundReview) {
-          console.log('found review ' + foundReview.userName + ' for foodTruck ' + truck.name);
-          if (err) {
-            console.log('Find One Error!', err);
-            return;
-          }
-          foundReview;
-          truck.save(function(err, savedTruck){
-            if ('SAVED TRUCK ERR', err) {
-              return console.log(err);
-            }
-            console.log('saved ' + savedTruck.name + ' by ' + foundReview.userName);
-            console.log('HELLOOOOOOOOOOO!!!!!!');
-          });
-        });
-      });
-    });
-  });
-});
-*/
